@@ -20,7 +20,7 @@
     <top>
         <SplitPane dividerPositions="0.5" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <items>
-                <ComboBox fx:id="switchSceneBox" BorderPane.alignment="BOTTOM_RIGHT" onAction="#handleSwitchScene">
+                <ComboBox fx:id="switchSceneBox" value="Flight information" BorderPane.alignment="BOTTOM_RIGHT" onAction="#handleSwitchScene">
                     <!--<items>-->
                     <!--<FXCollections fx:factory="observableArrayList">-->
                     <!--<String fx:id="passengersInfoStage" fx:value="Passengers Info" />-->
@@ -28,12 +28,10 @@
                     <!--</FXCollections>-->
                     <!--</items>-->
                 </ComboBox>
-                <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="293.0" spacing="5.0" >
-                    <children>
-                        <Button onAction="#handleAddPassenger" prefHeight="25.0" prefWidth="96.0" mnemonicParsing="false" text="Add passenger" />
-                        <Button onAction="#handleEditPassenger" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Edit passenger" />
-                    </children>
-                </HBox>
+                <!--<HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="293.0" spacing="5.0" >-->
+                    <!--<children>-->
+                    <!--</children>-->
+                <!--</HBox>-->
             </items>
         </SplitPane>
     </top>

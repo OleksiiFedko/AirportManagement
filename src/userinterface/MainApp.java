@@ -14,25 +14,14 @@ import storage.entities.PassengersEntity;
 
 import java.io.IOException;
 
-/**
- * Created by Алексей on 19.11.2016.
- */
+
 public class MainApp extends Application implements EventHandler<ActionEvent>{
 
     private Stage primaryStage;
-
-    private BorderPane rootLayout, rootLayout2;
+    private BorderPane rootLayout;
 
     public Stage getPrimaryStage() {
         return primaryStage;
-    }
-
-    public BorderPane getRootLayout() {
-        return rootLayout;
-    }
-
-    public BorderPane getRootLayout2() {
-        return rootLayout2;
     }
 
     public MainApp() {
@@ -61,25 +50,7 @@ public class MainApp extends Application implements EventHandler<ActionEvent>{
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();
-            // Show the scene containing the root layout.
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-            StaffController staffController = loader.getController();
-            staffController.setMainApp(this);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void initFlighrLayout(){
-        try {
-            // Load root layout from fxml file.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/RootLayout2.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/FlightLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
@@ -184,7 +155,6 @@ public class MainApp extends Application implements EventHandler<ActionEvent>{
     }
 
     public static void main(String[] args) {
-        PassengersEntity pe = new PassengersEntity(1, "Mariia", "Petrova", "Ukrainian", "ME832289", "28.06.1991", "Woman", "vip", "A2806");
         launch(args);
     }
 }
