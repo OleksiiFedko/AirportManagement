@@ -6,11 +6,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import storage.entities.PassengersEntity;
 
 import java.io.IOException;
 
@@ -56,101 +53,11 @@ public class MainApp extends Application implements EventHandler<ActionEvent>{
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
-            StaffController staffController = loader.getController();
-            staffController.setMainApp(this);
+            ManagerController managerController = loader.getController();
+            managerController.setMainApp(this);
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    public void showPassengerAddingDialog() {
-        try {
-            // Загружаем fxml-файл и создаём новую сцену
-            // для всплывающего диалогового окна.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/PassengerAdding.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-
-            // Создаём диалоговое окно Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Passenger adding");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            // Передаём адресата в контроллер.
-            PassengersAddingController pIController = loader.getController();
-            pIController.setDialogStage(dialogStage);
-
-            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
-            dialogStage.showAndWait();
-
-//            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-//            return false;
-        }
-    }
-
-    public void showPassengerEditingDialog(){
-        try {
-            // Загружаем fxml-файл и создаём новую сцену
-            // для всплывающего диалогового окна.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/PassengerEditing.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-
-            // Создаём диалоговое окно Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Passenger adding");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            // Передаём адресата в контроллер.
-            PassengersEditingController pEController = loader.getController();
-            pEController.setDialogStage(dialogStage);
-
-            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
-            dialogStage.showAndWait();
-
-//            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-//            return false;
-        }
-    }
-
-    public void showPassengerDeleteDialog(){
-        try {
-            // Загружаем fxml-файл и создаём новую сцену
-            // для всплывающего диалогового окна.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/PassengerDeleting.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-
-            // Создаём диалоговое окно Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Delete passenger");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            // Передаём адресата в контроллер.
-            PassengersDeletingController pDController = loader.getController();
-            pDController.setDialogStage(dialogStage);
-
-            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
-            dialogStage.showAndWait();
-
-//            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-//            return false;
         }
     }
 
