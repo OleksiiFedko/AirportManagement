@@ -39,7 +39,7 @@ public class MainApp extends Application {
 
     // App users Scenes
     private final String DEFAULT_USER = "view/UserScene.fxml";
-    private final String STAFF_USER = "view/UserScene.fxml";
+    private final String STAFF_USER = "view/ManagerScene.fxml";
     private final String ADMIN_USER = "view/UserScene.fxml";
 
     // App fields
@@ -54,12 +54,10 @@ public class MainApp extends Application {
 
 
     public MainApp() {
-
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
         this.mainAppWindow = primaryStage;
         this.mainAppWindow.getIcons().add(new Image(APP_ICON));
         setDefaultAppUser();
@@ -111,7 +109,7 @@ public class MainApp extends Application {
             case "User":
                 layout = DEFAULT_USER;
                 break;
-            case "Staff":
+            case "Manager":
                 layout = STAFF_USER;
                 break;
             case "SuperStaff":

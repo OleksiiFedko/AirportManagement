@@ -1,4 +1,4 @@
-package userinterface;
+package userinterface.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

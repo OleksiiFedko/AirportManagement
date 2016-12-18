@@ -8,18 +8,17 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import storage.dao.LoginDaoImpl;
 import userinterface.utils.SplitPaneDividerSlider;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class UserSceneController extends Controller implements Initializable {
 
-    @FXML private AnchorPane leftFilters;
+
     @FXML private ChoiceBox cityFrom;
     @FXML private ChoiceBox cityTo;
     @FXML private DatePicker datePickerFrom;
-
+    @FXML private AnchorPane leftFilters;
     @FXML private ToggleButton leftToggleButton;
     @FXML private SplitPane centerSplitPane;
     @FXML private SplitPane mainSplitPane;
