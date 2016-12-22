@@ -1,100 +1,164 @@
 package storage.entities;
 
+import javafx.beans.property.*;
+
 public class FlightsEntity {
-    private int id;
-    private String arrivalTime;
-    private String departureTime;
-    private String flightNumber;
-    private String flightStatus;
-    private String gate;
-    private String terminal;
-    private String cityOfDeparture;
-    private String cityOfArival;
+    private IntegerProperty id;
+    private StringProperty arrivalTime;
+    private StringProperty departureTime;
+    private StringProperty flightNumber;
+    private StringProperty flightStatus;
+    private StringProperty gate;
+    private StringProperty terminal;
+    private StringProperty cityOfDeparture;
+    private StringProperty cityOfArrival;
+    private StringProperty classType;
+    private DoubleProperty classPrice;
 
     public FlightsEntity() {
     }
 
-    public FlightsEntity(int id, String arrivalTime, String departureTime, String flightNumber, String flightStatus, String gate, String terminal, String cityOfDeparture, String cityOfArival) {
-        this.id = id;
-        this.arrivalTime = arrivalTime;
-        this.departureTime = departureTime;
-        this.flightNumber = flightNumber;
-        this.flightStatus = flightStatus;
-        this.gate = gate;
-        this.terminal = terminal;
-        this.cityOfDeparture = cityOfDeparture;
-        this.cityOfArival = cityOfArival;
+    public FlightsEntity(int id, String arrivalTime, String departureTime, String flightNumber, String flightStatus, String gate, String terminal, String cityOfDeparture, String cityOfArrival, String classType, Double classPrice) {
+        this.id =  new SimpleIntegerProperty(id);
+        this.arrivalTime =  new SimpleStringProperty(arrivalTime);
+        this.departureTime =  new SimpleStringProperty(departureTime);
+        this.flightNumber =  new SimpleStringProperty(flightNumber);
+        this.flightStatus =  new SimpleStringProperty(flightStatus);
+        this.gate =  new SimpleStringProperty(gate);
+        this.terminal =  new SimpleStringProperty(terminal);
+        this.cityOfDeparture =  new SimpleStringProperty(cityOfDeparture);
+        this.cityOfArrival =  new SimpleStringProperty(cityOfArrival);
+        this.classType = new SimpleStringProperty(classType);
+        this.classPrice = new SimpleDoubleProperty(classPrice);
+    }
+
+    public String getClassType() {
+        return classType.get();
+    }
+    public void setClassType(String classType) {
+        this.classType.set(classType);
+    }
+
+    public Double getClassPrice() {
+        return classPrice.get();
+    }
+    public void setClassPrice(Double classPrice) {
+        this.classPrice.set(classPrice);
+    }
+
+    public StringProperty classTypeProperty(){
+        return classType;
+    }
+
+    public DoubleProperty classPriceProperty(){
+        return classPrice;
     }
 
     public int getId() {
+        return id.get();
+    }
+
+    public IntegerProperty idProperty() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getArrivalTime() {
+    public StringProperty arrivalTimeProperty() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(String arrivalTime) {
-        this.arrivalTime = arrivalTime;
-    }
-
-    public String getDepartureTime() {
+    public StringProperty departureTimeProperty() {
         return departureTime;
     }
 
-    public void setDepartureTime(String departureTime) {
-        this.departureTime = departureTime;
-    }
-
-    public String getFlightNumber() {
+    public StringProperty flightNumberProperty() {
         return flightNumber;
     }
 
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
-    }
-
-    public String getFlightStatus() {
+    public StringProperty flightStatusProperty() {
         return flightStatus;
     }
 
-    public void setFlightStatus(String flightStatus) {
-        this.flightStatus = flightStatus;
-    }
-
-    public String getGate() {
+    public StringProperty gateProperty() {
         return gate;
     }
 
-    public void setGate(String gate) {
-        this.gate = gate;
-    }
-
-    public String getTerminal() {
+    public StringProperty terminalProperty() {
         return terminal;
     }
 
-    public void setTerminal(String terminal) {
-        this.terminal = terminal;
-    }
-
-    public String getCityOfDeparture() {
+    public StringProperty cityOfDepartureProperty() {
         return cityOfDeparture;
     }
 
+    public StringProperty cityOfArrivalProperty() {
+        return cityOfArrival;
+    }
+
+    public void setId(int id) {
+        this.id.set(id);
+    }
+
+    public String getArrivalTime() {
+        return arrivalTime.get();
+    }
+
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime.set(arrivalTime);
+    }
+
+    public String getDepartureTime() {
+        return departureTime.get();
+    }
+
+    public void setDepartureTime(String departureTime) {
+        this.departureTime.set(departureTime);
+    }
+
+    public String getFlightNumber() {
+        return flightNumber.get();
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber.set(flightNumber);
+    }
+
+    public String getFlightStatus() {
+        return flightStatus.get();
+    }
+
+    public void setFlightStatus(String flightStatus) {
+        this.flightStatus.set(flightStatus);
+    }
+
+    public String getGate() {
+        return gate.get();
+    }
+
+    public void setGate(String gate) {
+        this.gate.set(gate);
+    }
+
+    public String getTerminal() {
+        return terminal.get();
+    }
+
+    public void setTerminal(String terminal) {
+        this.terminal.set(terminal);
+    }
+
+    public String getCityOfDeparture() {
+        return cityOfDeparture.get();
+    }
+
     public void setCityOfDeparture(String cityOfDeparture) {
-        this.cityOfDeparture = cityOfDeparture;
+        this.cityOfDeparture.set(cityOfDeparture);
     }
 
-    public String getCityOfArival() {
-        return cityOfArival;
+    public String getCityOfArrival() {
+        return cityOfArrival.get();
     }
 
-    public void setCityOfArival(String cityOfArival) {
-        this.cityOfArival = cityOfArival;
+    public void setCityOfArrival(String cityOfArrival) {
+        this.cityOfArrival.set(cityOfArrival);
     }
 }

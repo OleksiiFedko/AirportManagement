@@ -5,13 +5,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ProgressIndicator?>
 <AnchorPane id="Splash" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label id="loading" layoutX="35.0" layoutY="164.0" prefHeight="21.0" prefWidth="202.0" text="Software is loading..." textFill="WHITE">
-            <font>
-                <Font size="15.0" />
-            </font>
-        </Label>
+        <!--<Label id="loading" layoutX="35.0" layoutY="164.0" prefHeight="21.0" prefWidth="202.0" text="Software is loading..." textFill="WHITE">-->
+            <!--<font>-->
+                <!--<Font size="15.0" />-->
+            <!--</font>-->
+        <!--</Label>-->
+        <ProgressIndicator id="splashBar" style="-fx-progress-color: white;" layoutX="450.0" layoutY="130.0" prefHeight="35.0" prefWidth="35.0">
+
+        </ProgressIndicator>
     </children>
     <stylesheets>
         <URL value="@../styles/splashStyle.css" />

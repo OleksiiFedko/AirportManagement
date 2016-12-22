@@ -8,56 +8,12 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 
-public class LoginDaoImpl implements LoginDao{
+public class LoginDaoImpl extends DataBaseUtil implements LoginDao{
 
-    private String url;
-    private String user;
-    private String password;
     private RootsEntity appUser;
     private Connection con;
     private PreparedStatement pstmt;
     private ResultSet rs;
-
-    public LoginDaoImpl(){
-        setDataBaseProperties();
-    }
-
-    private Connection getConnection(){
-        try {
-            return DriverManager.getConnection(this.url, this.user, this.password);
-        } catch(SQLException sqlEx){
-            System.out.println("Can't connect to the DataBase");
-            return null;
-        }
-    }
-
-    @Override
-    public void setDataBaseProperties() {
-
-        Properties prop = new Properties();
-        InputStream input = null;
-
-        try {
-            input = new FileInputStream("src/mysql.properties");
-            prop.load(input);
-
-            this.url = prop.getProperty("database");
-            this.user = prop.getProperty("dbuser");
-            this.password = prop.getProperty("dbpassword");
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
 
     @Override
     public boolean checkAppUser(String appUserLogin, String appUserPassword) {
@@ -66,7 +22,7 @@ public class LoginDaoImpl implements LoginDao{
 
         try {
 
-            con = getConnection();
+            con = getConnectionDb();
 
             if (con != null){
 
