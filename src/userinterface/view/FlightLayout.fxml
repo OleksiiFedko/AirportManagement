@@ -20,7 +20,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="840.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userinterface.view.FlightInfoController">
     <children>
         <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -28,14 +28,13 @@
                     <items>
                         <AnchorPane prefHeight="50.0" minHeight="50.0" maxHeight="50.0" prefWidth="200.0" styleClass="alt-content-pane">
                             <children>
-                                <Button mnemonicParsing="false"  prefHeight="25.0" prefWidth="100.0" text="Detail passenger information" />
+                                <Button mnemonicParsing="false"  prefHeight="30.0" prefWidth="200.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" text="Detail passenger information" />
                             </children>
                         </AnchorPane>
                         <SplitPane fx:id="centerSplitPane" dividerPositions="0.2, 1.0" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
                             <items>
                                 <AnchorPane fx:id="leftFilters" minHeight="0.0" prefHeight="456.0" minWidth="244.0" maxWidth="244.0"  prefWidth="116.0" styleClass="content-pane">
                                     <children>
-                                        <Label alignment="CENTER" prefHeight="80.0" prefWidth="244.0" text="Filters area" textAlignment="CENTER" wrapText="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                         <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <GridPane id="myGrid" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0">
                                                 <columnConstraints>
@@ -97,7 +96,6 @@
                                                     <RowConstraints prefHeight="20.0" vgrow="SOMETIMES" />
                                                 </rowConstraints>
                                                 <children>
-
                                                     <Label fx:id="lastNameLabel4" id="filterHead" text="Arrival" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                                                 </children>
                                             </GridPane>
@@ -127,17 +125,14 @@
                                                     <RowConstraints prefHeight="20.0" vgrow="SOMETIMES" />
                                                 </rowConstraints>
                                                 <children>
-
                                                     <Label fx:id="lastNameLabel6" id="filterHead" text="Seats class" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                                                 </children>
                                             </GridPane>
                                         </AnchorPane>
                                         <HBox spacing="10" alignment="center"
-                                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="390.0">
-                                            <Button prefWidth="100.0" text="Search"
-                                            />
-                                            <Button prefWidth="100.0" text="Reset"
-                                            />
+                                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="10.0">
+                                            <Button prefWidth="100.0" text="Search"/>
+                                            <Button prefWidth="100.0" text="Reset"/>
                                         </HBox>
                                     </children>
                                 </AnchorPane>
