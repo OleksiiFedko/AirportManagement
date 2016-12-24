@@ -23,8 +23,9 @@ public class PassengerInfoController extends Controller implements Initializable
     private Stage stage;
     private MainApp mainApp;
 
-//    PassengerInfoController(){
-//    }
+    public void setMainApp(MainApp mainApp){
+        this.mainApp = mainApp;
+    }
 
     @FXML private AnchorPane leftFilters;
     @FXML private ToggleButton leftToggleButton;

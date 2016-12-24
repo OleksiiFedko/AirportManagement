@@ -17,9 +17,21 @@
 <?import java.lang.String?>
 
 <BorderPane fx:id="managerScene" prefHeight="840.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userinterface.view.ManagerController">
-    <top>
-        <ComboBox fx:id="switchSceneBox" BorderPane.alignment="BOTTOM_LEFT" onAction="#handleSwitchScene">
-        </ComboBox>
-    </top>
+    <center>
+        <TabPane  tabClosingPolicy="UNAVAILABLE" >
+            <tabs>
+                <Tab fx:id="flightLayout" text="Flights information">
+                    <content>
+                        <fx:include source="FlightLayout.fxml"/>
+                    </content>
+                </Tab>
+                <Tab fx:id="passengersLayout" text="Passengers information">
+                    <content>
+                        <fx:include source="PassengerLayout.fxml"/>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
 </BorderPane>
 
