@@ -1,4 +1,4 @@
-package userinterface.view;
+package userinterface.controllers;
 
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -7,8 +7,6 @@ import javafx.scene.Cursor;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import userinterface.MainApp;
 import userinterface.utils.SplitPaneDividerSlider;
 import java.net.URL;
 import java.util.ResourceBundle;

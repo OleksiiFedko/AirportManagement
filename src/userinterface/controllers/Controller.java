@@ -1,4 +1,4 @@
-package userinterface.view;
+package userinterface.controllers;
 
 import userinterface.MainApp;
 

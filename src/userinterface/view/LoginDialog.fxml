@@ -8,7 +8,7 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<GridPane id="modal-dialog" fx:controller="userinterface.view.LoginDialogController"
+<GridPane id="modal-dialog" fx:controller="userinterface.controllers.LoginDialogController"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
 
     <padding>
