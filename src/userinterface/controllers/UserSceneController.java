@@ -1,4 +1,4 @@
-package userinterface.view;
+package userinterface.controllers;
 
 import businesslogic.GuiFilter;
 import javafx.beans.property.*;

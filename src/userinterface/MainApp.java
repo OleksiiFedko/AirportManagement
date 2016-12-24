@@ -3,7 +3,6 @@ package userinterface;
 import javafx.animation.*;
 import javafx.application.Application;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,17 +13,15 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import storage.dao.LoginDaoImpl;
 import storage.entities.RootsEntity;
-import userinterface.view.Controller;
-import userinterface.view.LoginDialogController;
+import userinterface.controllers.Controller;
+import userinterface.controllers.LoginDialogController;
 
 import java.io.IOException;
 
