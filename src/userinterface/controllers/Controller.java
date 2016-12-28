@@ -7,6 +7,9 @@ public class Controller {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
+    public MainApp getMainApp(){
+        return this.mainApp;
+    }
     public void logoutAction(){
         mainApp.setDefaultAppUser();
         mainApp.loadAppUserScene();

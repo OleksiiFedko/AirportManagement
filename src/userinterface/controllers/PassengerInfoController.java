@@ -21,10 +21,7 @@ import java.util.ResourceBundle;
 public class PassengerInfoController extends Controller implements Initializable{
     private Stage stage;
     private MainApp mainApp;
-
-    public void setMainApp(MainApp mainApp){
-        this.mainApp = mainApp;
-    }
+    private ManagerController managerController;
 
     @FXML private AnchorPane leftFilters;
     @FXML private ToggleButton leftToggleButton;
@@ -48,7 +45,7 @@ public class PassengerInfoController extends Controller implements Initializable
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Passenger adding");
             dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(stage);
+            dialogStage.initOwner(mainApp.getMainAppWindow());
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
             // Передаём адресата в контроллер.
@@ -75,7 +72,7 @@ public class PassengerInfoController extends Controller implements Initializable
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Passenger adding");
             dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(stage);
+            dialogStage.initOwner(mainApp.getMainAppWindow());
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
             // Передаём адресата в контроллер.
@@ -102,7 +99,7 @@ public class PassengerInfoController extends Controller implements Initializable
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Delete passenger");
             dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(stage);
+            dialogStage.initOwner(mainApp.getMainAppWindow());
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
             // Передаём адресата в контроллер.
@@ -122,7 +119,6 @@ public class PassengerInfoController extends Controller implements Initializable
         leftToggleButton.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) -> {
             leftSplitPaneDividerSlider.setAimContentVisible(t1);
         });
-
         leftToggleButton.setText("< Hide Filters");
         leftToggleButton.setCursor(Cursor.HAND);
 
@@ -135,5 +131,13 @@ public class PassengerInfoController extends Controller implements Initializable
         });
     }
 
+    @Override
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = (mainApp);
+    }
 
+    @Override
+    public MainApp getMainApp() {
+        return mainApp;
+    }
 }

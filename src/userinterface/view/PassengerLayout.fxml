@@ -87,8 +87,7 @@
                                                 </rowConstraints>
                                                 <children>
                                                     <Label text="First Name" GridPane.rowIndex="1" />
-                                                    <ChoiceBox fx:id="firstName" GridPane.columnIndex="1" GridPane.rowIndex="1"  minWidth="25.0" maxWidth="200.0">
-                                                    </ChoiceBox>
+                                                    <TextField fx:id="firstName" GridPane.columnIndex="1" GridPane.rowIndex="1"  minWidth="25.0" maxWidth="200.0"/>
                                                 </children>
                                             </GridPane>
                                             <GridPane id="firstNameFilterHead" styleClass="Filter" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0">
@@ -116,8 +115,7 @@
                                                 </rowConstraints>
                                                 <children>
                                                     <Label text="Last Name" GridPane.rowIndex="1" />
-                                                    <ChoiceBox fx:id="lastName" GridPane.columnIndex="1" GridPane.rowIndex="1"  minWidth="25.0" maxWidth="200.0">
-                                                    </ChoiceBox>
+                                                    <TextField fx:id="lastName" GridPane.columnIndex="1" GridPane.rowIndex="1"  minWidth="25.0" maxWidth="200.0"/>
                                                 </children>
                                             </GridPane>
                                             <GridPane id="lastNameFilterHead" styleClass="Filter" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0">
@@ -145,8 +143,7 @@
                                                 </rowConstraints>
                                                 <children>
                                                     <Label text="Passport" GridPane.rowIndex="1" />
-                                                    <ChoiceBox fx:id="passport" GridPane.columnIndex="1" GridPane.rowIndex="1"  minWidth="25.0" maxWidth="200.0">
-                                                    </ChoiceBox>
+                                                    <TextField fx:id="passport" GridPane.columnIndex="1" GridPane.rowIndex="1"  minWidth="25.0" maxWidth="200.0"/>
                                                 </children>
                                             </GridPane>
                                             <GridPane id="passportFilterHead" styleClass="Filter" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0">
