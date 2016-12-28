@@ -1,23 +1,37 @@
 package userinterface.controllers;
 
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
+import userinterface.MainApp;
 import userinterface.utils.SplitPaneDividerSlider;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FlightInfoController extends Controller implements Initializable {
+    private MainApp mainApp;
+    private ManagerController managerController;
 
     @FXML
     private AnchorPane leftFilters;
     @FXML private ToggleButton leftToggleButton;
     @FXML private SplitPane centerSplitPane;
     @FXML private SplitPane mainSplitPane;
+
+    @Override
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = (mainApp);
+    }
+
+    @Override
+    public MainApp getMainApp() {
+        return mainApp;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -40,4 +54,6 @@ public class FlightInfoController extends Controller implements Initializable {
             }
         });
     }
+
+
 }

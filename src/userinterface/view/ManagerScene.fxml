@@ -20,14 +20,16 @@
     <center>
         <TabPane  tabClosingPolicy="UNAVAILABLE" >
             <tabs>
-                <Tab fx:id="flightLayout" text="Flights information">
+                <Tab text="Flights information">
                     <content>
-                        <fx:include source="FlightLayout.fxml"/>
+                        <BorderPane></BorderPane>
+                        <fx:include fx:id="flightLayout" source="FlightLayout.fxml"/>
                     </content>
                 </Tab>
-                <Tab fx:id="passengersLayout" text="Passengers information">
+                <Tab text="Passengers information">
                     <content>
-                        <fx:include source="PassengerLayout.fxml"/>
+                        <BorderPane></BorderPane>
+                        <fx:include fx:id="passengersLayout" source="PassengerLayout.fxml"/>
                     </content>
                 </Tab>
             </tabs>
