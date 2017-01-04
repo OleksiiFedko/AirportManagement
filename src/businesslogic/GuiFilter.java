@@ -59,7 +59,6 @@ public class GuiFilter {
     }
 
     public String getSelectedValue(){
-
         if(filterControl instanceof DatePicker){
             DatePicker tmpControl = (DatePicker)filterControl;
             return (tmpControl.getValue() != null)?tmpControl.getValue().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")):null;
@@ -87,7 +86,6 @@ public class GuiFilter {
     }
 
     public void resetFilterGui(){
-
         if(filterControl instanceof DatePicker){
             DatePicker tmpControl = (DatePicker)filterControl;
             tmpControl.setValue(null);

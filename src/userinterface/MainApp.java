@@ -2,7 +2,6 @@ package userinterface;
 
 import javafx.animation.*;
 import javafx.application.Application;
-
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +21,6 @@ import javafx.util.Duration;
 import storage.entities.RootsEntity;
 import userinterface.controllers.Controller;
 import userinterface.controllers.LoginDialogController;
-
 import java.io.IOException;
 
 
@@ -121,26 +119,20 @@ public class MainApp extends Application {
     }
 
     public void initScene(String sceneTemplateUrl, String windowTitle){
-
         try {
-
             Scene scene;
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource(sceneTemplateUrl));
             mainRoot = loader.load();
-
             Controller controller = loader.getController();
             if (controller != null){
                 controller.setMainApp(this);
             }
-
             if (mainAppWindow.getScene() != null) {
                 scene = new Scene(mainRoot, mainAppWindow.getScene().getWidth(), mainAppWindow.getScene().getHeight());
             } else {
                 scene = new Scene(mainRoot, WINDOW_WIDTH, WINDOW_HEIGHT);
             }
-
             scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
                 @Override
                 public void handle(KeyEvent event) {
@@ -152,7 +144,6 @@ public class MainApp extends Application {
                     }
                 }
             });
-
             // mainWindow.setResizable(false);
             mainAppWindow.setScene(scene);
             mainAppWindow.setTitle(windowTitle);

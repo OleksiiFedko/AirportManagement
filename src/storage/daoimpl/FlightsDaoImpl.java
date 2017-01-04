@@ -1,14 +1,13 @@
-package storage.dao;
+package storage.daoimpl;
 
 import businesslogic.GuiFilter;
+import storage.DataBaseUtil;
+import storage.dao.FlightsDao;
 import storage.entities.FlightsEntity;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 public class FlightsDaoImpl extends DataBaseUtil implements FlightsDao {
 
@@ -26,22 +25,14 @@ public class FlightsDaoImpl extends DataBaseUtil implements FlightsDao {
 
     @Override
     public List<FlightsEntity> getAllFlights() {
-
         try {
-
             con = getConnectionDb();
-
             if (con != null){
-
                 pstmt = con.prepareStatement(query);
-
                 rs = pstmt.executeQuery();
-
                 if (!rs.isBeforeFirst() ) {
                     System.out.println("No data");
                 }
-
-
                 while (rs.next()) {
                     int flightId = rs.getInt(1);
                     String flightNumber = rs.getString(2);
@@ -54,7 +45,6 @@ public class FlightsDaoImpl extends DataBaseUtil implements FlightsDao {
                     String flightStatus = rs.getString(9);
                     String flightClass = rs.getString(10);
                     String flightPrice = rs.getString(11);
-
                     FlightsEntity currentFlight = new FlightsEntity(
                             flightId,
                             arrTime,
@@ -71,7 +61,6 @@ public class FlightsDaoImpl extends DataBaseUtil implements FlightsDao {
                    flightsList.add(currentFlight);
                 }
             }
-
         } catch (SQLException sqlEx) {
             System.out.println("Problems with connection");
         } finally {
@@ -84,7 +73,6 @@ public class FlightsDaoImpl extends DataBaseUtil implements FlightsDao {
 
     public List<FlightsEntity> getAllFilteredFlights(List<GuiFilter> filtersList){
         ArrayList<String> filterValuers = new ArrayList<>();
-
         filtersList.forEach(filter->{
             if (filter.getSelectedValue()!=null) {
                 String filteredString;

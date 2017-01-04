@@ -142,10 +142,8 @@
                                         </AnchorPane>
                                         <HBox spacing="10" alignment="center"
                                               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="390.0">
-                                            <Button prefWidth="100.0" text="Search" onAction="#handleSearchButton"
-                                            />
-                                            <Button fx:id="resetButton" prefWidth="100.0" text="Reset"
-                                            onAction="#handleResetButton"/>
+                                            <Button prefWidth="100.0" text="Search" onAction="#handleSearchButton"/>
+                                            <Button fx:id="resetButton" prefWidth="100.0" text="Reset" onAction="#handleResetButton"/>
                                         </HBox>
 
                                     </children>
@@ -184,7 +182,7 @@
                                         <ToggleButton visible="false" fx:id="rightToggleButton" layoutX="161.0" layoutY="-82.0" mnemonicParsing="false" selected="true" styleClass="navigation-button" text="" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                         <ToggleButton fx:id="leftToggleButton" mnemonicParsing="false"  selected="true" styleClass="navigation-button" text="test" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                         <ToggleButton visible="false" fx:id="bottomToggleButton" mnemonicParsing="false" selected="true" styleClass="navigation-button" text="" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                                        </children>
+                                    </children>
                                 </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" maxWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="content-pane" visible="false"/>
                             </items>
