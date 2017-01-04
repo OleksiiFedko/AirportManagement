@@ -13,8 +13,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import storage.dao.FiltersDaoImpl;
-import storage.dao.FlightsDaoImpl;
+import storage.daoimpl.FiltersDaoImpl;
+import storage.daoimpl.FlightsDaoImpl;
 import storage.entities.FlightsEntity;
 import userinterface.utils.SplitPaneDividerSlider;
 import java.net.URL;
@@ -161,12 +161,9 @@ public class UserSceneController extends Controller implements Initializable {
     }
 
     private void showFlightsInfo(){
-
         flightsData.clear();
-
         FlightsDaoImpl flightsDao = new FlightsDaoImpl();
         List<FlightsEntity> flightsListDB = flightsDao.getAllFilteredFlights(filtersList);
-
         if (flightsListDB != null) {
             flightsData.addAll(FXCollections.observableList(flightsListDB));
             flightsTable.setItems(flightsData);

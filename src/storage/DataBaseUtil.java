@@ -1,4 +1,4 @@
-package storage.dao;
+package storage;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;

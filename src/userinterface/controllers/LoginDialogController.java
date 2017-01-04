@@ -5,7 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import storage.dao.LoginDaoImpl;
+import storage.daoimpl.LoginDaoImpl;
 import storage.entities.RootsEntity;
 
 public class LoginDialogController extends Controller{

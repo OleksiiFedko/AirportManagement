@@ -1,100 +1,141 @@
 package storage.entities;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class PassengersEntity {
-    private int id;
-    private String firstName;
-    private String lastName;
-    private String nationality;
-    private String passport;
-    private String birthday;
-    private String sex;
-    private String classType;
-    private String flightNum;
+    private SimpleIntegerProperty id;
+    private SimpleStringProperty firstName;
+    private SimpleStringProperty lastName;
+    private SimpleStringProperty nationality;
+    private SimpleStringProperty passport;
+    private SimpleStringProperty birthday;
+    private SimpleStringProperty sex;
+    private SimpleStringProperty classType;
+    private SimpleStringProperty flightNum;
 
     public PassengersEntity() {
     }
 
     public PassengersEntity(int id, String firstName, String lastName, String nationality, String passport, String birthday, String sex, String classType, String flightNum) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.nationality = nationality;
-        this.passport = passport;
-        this.birthday = birthday;
-        this.sex = sex;
-        this.classType = classType;
-        this.flightNum = flightNum;
+        this.id = new SimpleIntegerProperty(id);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.nationality = new SimpleStringProperty(nationality);
+        this.passport = new SimpleStringProperty(passport);
+        this.birthday = new SimpleStringProperty(birthday);
+        this.sex = new SimpleStringProperty(sex);
+        this.classType = new SimpleStringProperty(classType);
+        this.flightNum = new SimpleStringProperty(flightNum);
     }
 
     public int getId() {
-        return id;
+        return id.get();
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id.set(id);
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstName.get();
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName.set(firstName);
     }
 
     public String getLastName() {
-        return lastName;
+        return lastName.get();
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName.set(lastName);
     }
 
     public String getNationality() {
-        return nationality;
+        return nationality.get();
     }
 
     public void setNationality(String nationality) {
-        this.nationality = nationality;
+        this.nationality.set(nationality);
     }
 
     public String getPassport() {
-        return passport;
+        return passport.get();
     }
 
     public void setPassport(String passport) {
-        this.passport = passport;
+        this.passport.set(passport);
     }
 
     public String getBirthday() {
-        return birthday;
+        return birthday.get();
     }
 
     public void setBirthday(String birthday) {
-        this.birthday = birthday;
+        this.birthday.set(birthday);
     }
 
     public String getSex() {
-        return sex;
+        return sex.get();
     }
 
     public void setSex(String sex) {
-        this.sex = sex;
+        this.sex.set(sex);
     }
 
     public String getClassType() {
-        return classType;
+        return classType.get();
     }
 
     public void setClassType(String classType) {
-        this.classType = classType;
+        this.classType.set(classType);
     }
 
     public String getFlightNum() {
-        return flightNum;
+        return flightNum.get();
     }
 
     public void setFlightNum(String flightNum) {
-        this.flightNum = flightNum;
+        this.flightNum.set(flightNum);
+    }
+
+    public IntegerProperty idProperty(){
+        return id;
+    }
+
+    public StringProperty firstNameProperty(){
+        return firstName;
+    }
+
+    public StringProperty lastNameProperty(){
+        return lastName;
+    }
+
+    public StringProperty nationalityProperty(){
+        return nationality;
+    }
+
+    public StringProperty passportProperty(){
+        return passport;
+    }
+
+    public StringProperty birthdayProperty(){
+        return birthday;
+    }
+
+    public StringProperty sexProperty(){
+        return sex;
+    }
+
+    public StringProperty classTypeProperty(){
+        return classType;
+    }
+
+    public StringProperty flightNumProperty(){
+        return flightNum;
     }
 }

@@ -1,7 +1,9 @@
-package storage.dao;
+package storage.daoimpl;
 
 import businesslogic.GuiFilter;
 import javafx.scene.control.Alert;
+import storage.DataBaseUtil;
+import storage.dao.FilterDao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,21 +18,14 @@ public class FiltersDaoImpl extends DataBaseUtil implements FilterDao {
 
     @Override
     public void getFilterItems(GuiFilter filter) {
-
         try {
-
             con = getConnectionDb();
-
             if (con != null) {
-
                 String field = filter.getSqlField();
                 String table = filter.getSqlTable();
-
-                String query = "SELECT DISTINCT "+field+" FROM "+table+" ORDER BY "+field;
-
+                String query = "SELECT DISTINCT " + field + " FROM " + table + " ORDER BY " + field;
                 pstmt = con.prepareStatement(query);
                 rs = pstmt.executeQuery();
-
                 if (!rs.isBeforeFirst()) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information Dialog");
@@ -38,14 +33,11 @@ public class FiltersDaoImpl extends DataBaseUtil implements FilterDao {
                     alert.setContentText("No data from DB");
                     alert.showAndWait();
                 }
-
                 int i = 1;
-
                 while (rs.next()) {
                     String item = rs.getString(1);
                     filter.getFilterValues().add(item);
                 }
-
             }
 
         } catch (SQLException sqlEx){

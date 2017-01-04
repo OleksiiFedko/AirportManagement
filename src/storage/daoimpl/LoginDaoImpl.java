@@ -1,14 +1,12 @@
-package storage.dao;
+package storage.daoimpl;
 
+import storage.DataBaseUtil;
+import storage.dao.LoginDao;
 import storage.entities.RootsEntity;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
-import java.util.Properties;
 
-public class LoginDaoImpl extends DataBaseUtil implements LoginDao{
+public class LoginDaoImpl extends DataBaseUtil implements LoginDao {
 
     private RootsEntity appUser;
     private Connection con;
