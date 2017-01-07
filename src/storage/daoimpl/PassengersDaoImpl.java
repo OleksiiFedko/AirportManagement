@@ -70,16 +70,16 @@ public class PassengersDaoImpl extends DataBaseUtil implements PassengersDao{
         return passengersList;
     }
 
-    public List<PassengersEntity> getAllFilteredPassangers(List<GuiFilter> filtersList){
+    public List<PassengersEntity> getAllFilteredPassengers(List<GuiFilter> filtersList){
         ArrayList<String> filterValuers = new ArrayList<>();
         filtersList.forEach(filter->{
             if (filter.getSelectedValue()!=null) {
                 String filteredString;
                 filterValuers.add(filter.getSelectedValue());
-                String tableShortName = "a.";
-                if (filter.getSqlField().equals("ClassType") || filter.getSqlField().equals("Price")){
-                    tableShortName = "b.";
-                }
+//                String tableShortName = "a.";
+//                if (filter.getSqlField().equals("ClassType") || filter.getSqlField().equals("Price")){
+//                    tableShortName = "b.";
+//                }
                 if (filterValuers.size() == 1) {
                     filteredString = " WHERE " + filter.getSqlField() + "='"+ filter.getSelectedValue()+"'";
                 } else {
