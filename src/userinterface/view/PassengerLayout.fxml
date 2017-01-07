@@ -79,7 +79,7 @@
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 </rowConstraints>
                                                 <children>
-                                                    <Label text="F Name" GridPane.rowIndex="1" />
+                                                    <Label text="Name" GridPane.rowIndex="1" />
                                                     <TextField fx:id="firstNameField" GridPane.columnIndex="1" GridPane.rowIndex="1"  minWidth="25.0" maxWidth="200.0"/>
                                                 </children>
                                             </GridPane>
@@ -190,11 +190,6 @@
                                 <AnchorPane minHeight="0.0" minWidth="0.0" maxWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="content-pane" visible="false"/>
                             </items>
                         </SplitPane>
-                        <AnchorPane minHeight="50.0" maxHeight="50.0" minWidth="0.0" prefHeight="10.0" prefWidth="160.0" styleClass="alt-content-pane">
-                            <children>
-                                <Label alignment="CENTER" text="Footer area (if necessary)" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                            </children>
-                        </AnchorPane>
                     </items>
                 </SplitPane>
                 <VBox alignment="CENTER" mouseTransparent="true" prefHeight="0.0" prefWidth="0.0" spacing="0.0" visible="false">

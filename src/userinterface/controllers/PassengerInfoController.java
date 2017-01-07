@@ -60,6 +60,11 @@ public class PassengerInfoController extends Controller implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        filtersList.add(new GuiFilter(flightNumberBox, "Flights", "FlightNumber", true));
+        filtersList.add(new GuiFilter(firstNameField, "PassengersInfo", "FirstName", true));
+        filtersList.add(new GuiFilter(lastNameField, "PassengersInfo", "LastName"));
+        filtersList.add(new GuiFilter(passportField, "PassengersInfo", "Passport", true));
+
         setFiltersPaneAnimation();
         setFiltersItems();
         initTableView();
@@ -69,7 +74,7 @@ public class PassengerInfoController extends Controller implements Initializable
     private void showPassengersInfo() {
         passengersData.clear();
         PassengersDaoImpl passengersDao = new PassengersDaoImpl();
-        List<PassengersEntity> passengersListDB = passengersDao.getAllFilteredPassangers(filtersList);
+        List<PassengersEntity> passengersListDB = passengersDao.getAllFilteredPassengers(filtersList);
         if (passengersListDB != null) {
             passengersData.addAll(FXCollections.observableList(passengersListDB));
             passengersTable.setItems(passengersData);
