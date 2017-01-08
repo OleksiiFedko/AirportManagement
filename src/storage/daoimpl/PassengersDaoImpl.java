@@ -20,7 +20,7 @@ public class PassengersDaoImpl extends DataBaseUtil implements PassengersDao{
             "FirstName, LastName, " +
             "Nationality, Passport, " +
             "Birthday, Sex, " +
-            "ClassType, FlightNum FROM PassengersInfo";
+            "ClassType, FlightNumber FROM PassengersInfo";
 
     private List<PassengersEntity> passengersList = new ArrayList<>();
 
