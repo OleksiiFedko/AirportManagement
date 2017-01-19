@@ -35,7 +35,7 @@ public class MainApp extends Application {
     // App users Scenes
     private final String DEFAULT_USER = "view/UserScene.fxml";
     private final String STAFF_USER = "view/ManagerScene.fxml";
-    private final String ADMIN_USER = "view/UserScene.fxml";
+    private final String ADMIN_USER = "view/AdminScene.fxml";
 
     // App fields
     private Stage mainAppWindow;

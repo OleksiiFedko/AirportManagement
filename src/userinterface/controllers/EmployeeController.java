@@ -1,16 +1,20 @@
-package adminInterface;
+package userinterface.controllers;
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  * Created by Alish on 07.12.2016.
  */
-public class Employee {
-
+public class EmployeeController {
     private int idRoots;
     private String login;
     private String password;
     private String RootName;
 
-    public Employee(int idRoots, String login, String password, String rootName){
+    public EmployeeController(int idRoots, String login, String password, String rootName){
         this.idRoots = idRoots;
         this.login = login;
         this.password = password;
