@@ -1,5 +1,6 @@
 package storage.dao;
 
+import businesslogic.GuiFilter;
 import storage.entities.RootsEntity;
 import java.util.List;
 

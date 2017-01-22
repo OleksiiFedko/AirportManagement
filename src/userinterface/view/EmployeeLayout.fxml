@@ -57,8 +57,8 @@
                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                       <Label text="Name" GridPane.rowIndex="1" />
-                                                       <TextField fx:id="firstNameField" maxWidth="200.0" minWidth="25.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                       <Label text="Root" GridPane.rowIndex="1" />
+                                                       <TextField fx:id="rootField" maxWidth="200.0" minWidth="25.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                    </children>
                                                </GridPane>
                                                <GridPane id="firstNameFilterHead" styleClass="Filter" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0">
@@ -87,8 +87,8 @@
                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                       <Label text="L Name" GridPane.rowIndex="1" />
-                                                       <TextField fx:id="lastNameField" maxWidth="200.0" minWidth="25.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                       <Label text="Login" GridPane.rowIndex="1" />
+                                                       <TextField fx:id="loginField" maxWidth="200.0" minWidth="25.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                    </children>
                                                </GridPane>
                                                <GridPane id="lastNameFilterHead" styleClass="Filter" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0">
@@ -116,7 +116,7 @@
                                 <AnchorPane>
                                     <children>
                                         <Label alignment="CENTER" text="Content area" textAlignment="CENTER" wrapText="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                        <TableView fx:id="emplyeeTable" layoutY="36.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="36.0">
+                                        <TableView fx:id="EmployeeTable" layoutY="36.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="36.0">
                                             <placeholder>
                                                 <Label text="No data to display" />
                                             </placeholder>

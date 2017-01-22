@@ -5,6 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import storage.daoimpl.RootsDaoImpl;
 
 /**
  * Created by Alish on 19.01.2017.
@@ -19,7 +20,7 @@ public class EmployeeAddController {
 
 
     private Stage dialogStage;
-    private EmployeeController employee;
+    private RootsDaoImpl employee;
     private boolean okClicked = false;
 
     @FXML
@@ -30,14 +31,7 @@ public class EmployeeAddController {
         this.dialogStage = dialogStage;
     }
 
-    public void setEmployee(EmployeeController employee) {
-        this.employee = employee;
 
-        login.setText(employee.getLogin());
-        password.setText(employee.getPassword());
-        roots.setText(employee.getRootName());
-
-    }
 
     public boolean isOkClicked() {
         return okClicked;
@@ -46,15 +40,12 @@ public class EmployeeAddController {
 
     @FXML
     private void handleOk() {
-        if (isInputValid()) {
-            employee.setLogin(login.getText());
-            employee.setPassword(password.getText());
-            employee.setRootName(roots.getText());
+
 
             okClicked = true;
             dialogStage.close();
-        }
     }
+
 
 
     @FXML
