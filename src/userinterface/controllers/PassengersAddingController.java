@@ -23,7 +23,7 @@ public class PassengersAddingController {
 
     public void setDialogStage(Stage dialogStage) {
             this.dialogStage = dialogStage;
-    }
+      }
 
     @FXML
     public void handleCancelButton() {
@@ -34,10 +34,10 @@ public class PassengersAddingController {
      * * Вызывается, когда пользователь кликнул по кнопке OK.
      * */
     @FXML
-    public void handleOk() {
+    public void handleOkAdd() {
 //        if(isInputValid()){
-            PassengersEntity currentPassenger = new PassengersEntity(firstName.getText(), lastName.getText(), nationality.getText(), birthday.getText(),
-            passport.getText(), sex.getText(), classType.getText(), flightNum.getText());
+        PassengersEntity currentPassenger = new PassengersEntity(firstName.getText(), lastName.getText(), nationality.getText(), birthday.getText(),
+                passport.getText(), sex.getText(), classType.getText(), flightNum.getText());
 //        }
         dialogStage.close();
         PassengersDaoImpl passengersDao = new PassengersDaoImpl();
@@ -94,5 +94,4 @@ public class PassengersAddingController {
             return false;
         }
     }
-
 }

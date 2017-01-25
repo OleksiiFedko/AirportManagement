@@ -21,8 +21,9 @@ public class PassengersDeletingController {
     }
 
     @FXML
-    public void handleOk() {
-
+    public void handleOkDelete() {
+        okClicked = true;
+        dialogStage.close();
     }
 
     public boolean isOkClicked() {
