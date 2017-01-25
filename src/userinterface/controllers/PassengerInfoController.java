@@ -5,12 +5,17 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -30,13 +35,15 @@ public class PassengerInfoController extends Controller implements Initializable
     private Stage stage;
     private MainApp mainApp;
     private ManagerController managerController;
+    private KeyCombination keyCombClose = new KeyCodeCombination(KeyCode.ESCAPE);
+    private KeyCombination keyCombOk = new KeyCodeCombination(KeyCode.ENTER);
 
     @FXML private ChoiceBox flightNumberBox;
     @FXML private TextField firstNameField;
     @FXML private TextField lastNameField;
     @FXML private TextField passportField;
 
-    @FXML private TableView<PassengersEntity> passengersTable;
+    @FXML protected TableView<PassengersEntity> passengersTable;
     @FXML private TableColumn<ObservableList<PassengersEntity>, String> numberColumn;
     @FXML private TableColumn<PassengersEntity, String> firstNameColumn;
     @FXML private TableColumn<PassengersEntity, String> lastNameColumn;
@@ -51,6 +58,7 @@ public class PassengerInfoController extends Controller implements Initializable
     @FXML private ToggleButton leftToggleButton;
     @FXML private SplitPane centerSplitPane;
     @FXML private SplitPane mainSplitPane;
+
 
     private final int ROWS_PER_PAGE = 15;
     private int currentPage = 1;
@@ -125,7 +133,21 @@ public class PassengerInfoController extends Controller implements Initializable
             PassengersAddingController pAController = loader.getController();
             pAController.setDialogStage(dialogStage);
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+
+            scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent event) {
+                    if (keyCombClose.match(event)) {
+                        dialogStage.close();
+                    } else if (keyCombOk.match(event)) {
+                        pAController.handleOk();
+                    }
+                }
+            });
+
             dialogStage.showAndWait();
+
+
 //            return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -179,6 +201,18 @@ public class PassengerInfoController extends Controller implements Initializable
             PassengersDeletingController pDController = loader.getController();
             pDController.setDialogStage(dialogStage);
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+
+//            scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+//                @Override
+//                public void handle(KeyEvent event) {
+//                    if (keyCombClose.match(event)) {
+//                        dialogStage.close();
+//                    } else if (keyCombOk.match(event)) {
+//                        pDController.handleOk();
+//                    }
+//                }
+//            });
+
             dialogStage.showAndWait();
 //            return true;
         } catch (IOException e) {
@@ -231,5 +265,9 @@ public class PassengerInfoController extends Controller implements Initializable
             new FiltersDaoImpl().getFilterItems(filter);
             filter.setFilterGui();
         });
+    }
+
+    public TableView<PassengersEntity> getPassengersTable() {
+        return passengersTable;
     }
 }

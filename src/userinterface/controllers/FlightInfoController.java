@@ -25,9 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class FlightInfoController extends Controller implements Initializable {
-//    private MainApp mainApp;
-//    private ManagerController managerController;
+public class FlightInfoController extends UserSceneController implements Initializable {
 
     @FXML private ChoiceBox cityFrom;
     @FXML private ChoiceBox cityTo;
@@ -59,18 +57,6 @@ public class FlightInfoController extends Controller implements Initializable {
     private ObservableList<FlightsEntity> flightsData = FXCollections.observableArrayList();
     private List<GuiFilter> filtersList = new ArrayList<>();
 
-
-
-//    @Override
-//    public void setMainApp(MainApp mainApp) {
-//        this.mainApp = (mainApp);
-//    }
-//
-//    @Override
-//    public MainApp getMainApp() {
-//        return mainApp;
-//    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -79,98 +65,98 @@ public class FlightInfoController extends Controller implements Initializable {
         filtersList.add(new GuiFilter(datePickerFrom, "Flights", "DepartureTime"));
         filtersList.add(new GuiFilter(seatsBox, "PriceList", "ClassType", true));
 
-        setFiltersPaneAnimation();
+//        setFiltersPaneAnimation();
         setFiltersItems();
-        initTableView();
+//        initTableView();
         showFlightsInfo();
     }
 
 
-    private void setFiltersPaneAnimation(){
+//    private void setFiltersPaneAnimation(){
+//
+//        SplitPaneDividerSlider leftSplitPaneDividerSlider = new SplitPaneDividerSlider(centerSplitPane, 0, SplitPaneDividerSlider.Direction.LEFT, leftFilters);
+//
+//        leftToggleButton.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) -> {
+//            leftSplitPaneDividerSlider.setAimContentVisible(t1);
+//        });
+//
+//        leftToggleButton.setText("< Hide Filters");
+//        leftToggleButton.setCursor(Cursor.HAND);
+//
+//        leftToggleButton.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) -> {
+//            if (t1) {
+//                leftToggleButton.setText("< Hide Filters");
+//            } else {
+//                leftToggleButton.setText("> Show Filters");
+//            }
+//        });
+//    }
 
-        SplitPaneDividerSlider leftSplitPaneDividerSlider = new SplitPaneDividerSlider(centerSplitPane, 0, SplitPaneDividerSlider.Direction.LEFT, leftFilters);
-
-        leftToggleButton.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) -> {
-            leftSplitPaneDividerSlider.setAimContentVisible(t1);
-        });
-
-        leftToggleButton.setText("< Hide Filters");
-        leftToggleButton.setCursor(Cursor.HAND);
-
-        leftToggleButton.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) -> {
-            if (t1) {
-                leftToggleButton.setText("< Hide Filters");
-            } else {
-                leftToggleButton.setText("> Show Filters");
-            }
-        });
-    }
-
-    private void initTableView(){
-
-        numberColumn.setCellValueFactory(cellData -> {
-            int index = cellData.getTableView().getItems().indexOf(cellData.getValue());
-            return new SimpleStringProperty(String.valueOf((index+1)+(currentPage-1)*ROWS_PER_PAGE));
-        });
-        numberColumn.setSortable(false);
-
-        flightColumn.setCellValueFactory(
-                cellData -> cellData.getValue().flightNumberProperty());
-        depCityColumn.setCellValueFactory(
-                cellData -> cellData.getValue().cityOfDepartureProperty());
-        depDateColumn.setCellValueFactory(
-                cellData -> cellData.getValue().departureTimeProperty());
-        arrCityColumn.setCellValueFactory(
-                cellData -> cellData.getValue().cityOfArrivalProperty());
-        arrDateColumn.setCellValueFactory(
-                cellData -> cellData.getValue().arrivalTimeProperty());
-        flightStatusColumn.setCellValueFactory(
-                cellData -> cellData.getValue().flightStatusProperty());
-        flightStatusColumn.setCellFactory(column -> {
-            return new TableCell<FlightsEntity, String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setText(item);
-                    if (item == null || empty) {
-                        setText("");
-                        setStyle("");
-                    }
-                    if (item != null) {
-                        if (item.equals("In process")){
-                            setTextFill(Color.WHITE);
-                            setStyle("-fx-background-color: green; -fx-border-color: grey");
-                        } else {
-                            setTextFill(Color.BLACK);
-                            setStyle("");
-                        }
-
-                    }
-                }
-            };
-        });
-
-        flightClassColumn.setCellValueFactory(
-                cellData -> cellData.getValue().classTypeProperty());
-
-        flightPriceColumn.setCellValueFactory(new PropertyValueFactory<FlightsEntity, Double>("classPrice"));
-        flightPriceColumn.setCellFactory(column -> {
-            return new TableCell<FlightsEntity, Double>() {
-                @Override
-                protected void updateItem(Double item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (item == null || empty){
-                        setText("");
-                    }
-                    if(item != null){
-                        DecimalFormat df = new DecimalFormat("0.00");
-                        setText(String.valueOf(df.format(item)));
-                    }
-
-                }
-            };
-        });
-    }
+//    private void initTableView(){
+//
+//        numberColumn.setCellValueFactory(cellData -> {
+//            int index = cellData.getTableView().getItems().indexOf(cellData.getValue());
+//            return new SimpleStringProperty(String.valueOf((index+1)+(currentPage-1)*ROWS_PER_PAGE));
+//        });
+//        numberColumn.setSortable(false);
+//
+//        flightColumn.setCellValueFactory(
+//                cellData -> cellData.getValue().flightNumberProperty());
+//        depCityColumn.setCellValueFactory(
+//                cellData -> cellData.getValue().cityOfDepartureProperty());
+//        depDateColumn.setCellValueFactory(
+//                cellData -> cellData.getValue().departureTimeProperty());
+//        arrCityColumn.setCellValueFactory(
+//                cellData -> cellData.getValue().cityOfArrivalProperty());
+//        arrDateColumn.setCellValueFactory(
+//                cellData -> cellData.getValue().arrivalTimeProperty());
+//        flightStatusColumn.setCellValueFactory(
+//                cellData -> cellData.getValue().flightStatusProperty());
+//        flightStatusColumn.setCellFactory(column -> {
+//            return new TableCell<FlightsEntity, String>() {
+//                @Override
+//                protected void updateItem(String item, boolean empty) {
+//                    super.updateItem(item, empty);
+//                    setText(item);
+//                    if (item == null || empty) {
+//                        setText("");
+//                        setStyle("");
+//                    }
+//                    if (item != null) {
+//                        if (item.equals("In process")){
+//                            setTextFill(Color.WHITE);
+//                            setStyle("-fx-background-color: green; -fx-border-color: grey");
+//                        } else {
+//                            setTextFill(Color.BLACK);
+//                            setStyle("");
+//                        }
+//
+//                    }
+//                }
+//            };
+//        });
+//
+//        flightClassColumn.setCellValueFactory(
+//                cellData -> cellData.getValue().classTypeProperty());
+//
+//        flightPriceColumn.setCellValueFactory(new PropertyValueFactory<FlightsEntity, Double>("classPrice"));
+//        flightPriceColumn.setCellFactory(column -> {
+//            return new TableCell<FlightsEntity, Double>() {
+//                @Override
+//                protected void updateItem(Double item, boolean empty) {
+//                    super.updateItem(item, empty);
+//                    if (item == null || empty){
+//                        setText("");
+//                    }
+//                    if(item != null){
+//                        DecimalFormat df = new DecimalFormat("0.00");
+//                        setText(String.valueOf(df.format(item)));
+//                    }
+//
+//                }
+//            };
+//        });
+//    }
 
     private void showFlightsInfo(){
         flightsData.clear();

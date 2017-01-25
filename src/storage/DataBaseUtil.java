@@ -63,4 +63,12 @@ public abstract class DataBaseUtil{
             }
         }
     }
+
+    public static void openConnection(){
+
+    }
+
+    public static void closeConnetcion(){
+
+    }
 }

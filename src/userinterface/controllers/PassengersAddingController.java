@@ -1,98 +1,86 @@
 package userinterface.controllers;
 
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import storage.daoimpl.PassengersDaoImpl;
 import storage.entities.PassengersEntity;
 
 public class PassengersAddingController {
-      @FXML
-      private TextField firstName;
-      @FXML
-      private TextField lastName;
-      @FXML
-      private TextField nationality;
-      @FXML
-      private TextField birthday;
-      @FXML
-      private TextField passport;
-      @FXML
-      private TextField sex;
-      @FXML
-      private TextField classType;
-      @FXML
-      private TextField flightNum;
+    @FXML private TextField firstName;
+    @FXML private TextField lastName;
+    @FXML private TextField nationality;
+    @FXML private TextField birthday;
+    @FXML private TextField passport;
+    @FXML private TextField sex;
+    @FXML private TextField classType;
+    @FXML private TextField flightNum;
 
-      private Stage dialogStage;
-//    private PassengersEntity passengersEntity;
+    private Stage dialogStage;
+    private boolean okClicked = false;
 
-      public void setDialogStage(Stage dialogStage) {
+    public void setDialogStage(Stage dialogStage) {
             this.dialogStage = dialogStage;
-      }
+    }
 
-      public PassengersAddingController(){
+    @FXML
+    public void handleCancelButton() {
+        dialogStage.close();
+    }
 
-      }
+    /**
+     * * Вызывается, когда пользователь кликнул по кнопке OK.
+     * */
+    @FXML
+    public void handleOk() {
+//        if(isInputValid()){
+            PassengersEntity currentPassenger = new PassengersEntity(firstName.getText(), lastName.getText(), nationality.getText(), birthday.getText(),
+            passport.getText(), sex.getText(), classType.getText(), flightNum.getText());
+//        }
+        dialogStage.close();
+        PassengersDaoImpl passengersDao = new PassengersDaoImpl();
+        passengersDao.addPassenger(currentPassenger);
+        okClicked = true;
+    }
 
-      @FXML
-      public void handleCancelButton(){
-            dialogStage.close();
-      }
+    public boolean isOkClicked() {
+        return okClicked;
+    }
 
-      @FXML
-      private void initialize() {
-      }
-
-//    /**
-//     * Вызывается, когда пользователь кликнул по кнопке OK.
-//     */
-//    @FXML
-//    private void handleOk() {
-//
-//    }
-//
-//    /**
-//     * Проверяет пользовательский ввод в текстовых полях.
-//     *
-//     * @return true, если пользовательский ввод корректен
-//     */
-    /*private boolean isInputValid() {
+    /**
+     * Проверяет пользовательский ввод в текстовых полях.
+     *
+     * @return true, если пользовательский ввод корректен
+     */
+    private boolean isInputValid() {
         String errorMessage = "";
 
-        if (firstNameField.getText() == null || firstNameField.getText().length() == 0) {
+        if (firstName.getText() == null || firstName.getText().length() == 0) {
             errorMessage += "No valid first name!\n";
         }
-        if (lastNameField.getText() == null || lastNameField.getText().length() == 0) {
+        if (lastName.getText() == null || lastName.getText().length() == 0) {
             errorMessage += "No valid last name!\n";
         }
-        if (streetField.getText() == null || streetField.getText().length() == 0) {
-            errorMessage += "No valid street!\n";
+        if (nationality.getText() == null || nationality.getText().length() == 0) {
+            errorMessage += "No valid nationality!\n";
         }
-
-        if (postalCodeField.getText() == null || postalCodeField.getText().length() == 0) {
-            errorMessage += "No valid postal code!\n";
-        } else {
-            // пытаемся преобразовать почтовый код в int.
-            try {
-                Integer.parseInt(postalCodeField.getText());
-            } catch (NumberFormatException e) {
-                errorMessage += "No valid postal code (must be an integer)!\n";
-            }
-        }
-
-        if (cityField.getText() == null || cityField.getText().length() == 0) {
-            errorMessage += "No valid city!\n";
-        }
-
-        if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {
+        if (birthday.getText() == null || birthday.getText().length() == 0) {
             errorMessage += "No valid birthday!\n";
-        } else {
-            if (!DateUtil.validDate(birthdayField.getText())) {
-                errorMessage += "No valid birthday. Use the format dd.mm.yyyy!\n";
-            }
         }
-
+        if (passport.getText() == null || passport.getText().length() == 0) {
+            errorMessage += "No valid passport!\n";
+        }
+        if (sex.getText() == null || sex.getText().length() == 0) {
+            errorMessage += "No valid sex!\n";
+        }
+        if (classType.getText() == null || sex.getText().length() == 0) {
+            errorMessage += "No valid class type!\n";
+        }
+        if (flightNum.getText() == null || flightNum.getText().length() == 0) {
+            errorMessage += "No valid flight number!\n";
+        }
         if (errorMessage.length() == 0) {
             return true;
         } else {
@@ -102,10 +90,9 @@ public class PassengersAddingController {
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid fields");
             alert.setContentText(errorMessage);
-
             alert.showAndWait();
-
             return false;
         }
-    }*/
- }
+    }
+
+}

@@ -25,13 +25,11 @@ import java.util.ResourceBundle;
 
 public class UserSceneController extends Controller implements Initializable {
 
-
     @FXML private ChoiceBox cityFrom;
     @FXML private ChoiceBox cityTo;
     @FXML private DatePicker datePickerFrom;
     @FXML private AnchorPane leftFilters;
     @FXML private ChoiceBox seatsBox;
-
     @FXML private TableView<FlightsEntity> flightsTable;
     @FXML private TableColumn<ObservableList<FlightsEntity>, String> numberColumn;
     @FXML private TableColumn<FlightsEntity, String> flightColumn;
@@ -44,9 +42,7 @@ public class UserSceneController extends Controller implements Initializable {
     @FXML private TableColumn<FlightsEntity, String> flightClassColumn;
     @FXML private TableColumn flightPriceColumn;
     @FXML private TableColumn<FlightsEntity, String> flightStatusColumn;
-
     //@FXML private Pagination flightsPagination;
-
     @FXML private ToggleButton leftToggleButton;
     @FXML private SplitPane centerSplitPane;
     @FXML private SplitPane mainSplitPane;

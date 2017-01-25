@@ -3,13 +3,15 @@ package userinterface.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -28,7 +30,7 @@ public class ManagerController extends Controller implements Initializable {
     @FXML
     private AnchorPane flightLayout;
     @FXML
-    private FlightInfoController flightLayoutController;
+    private UserSceneController flightLayoutController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,5 +47,7 @@ public class ManagerController extends Controller implements Initializable {
     public MainApp getMainApp(){
         return mainApp;
     }
+
+
 
 }

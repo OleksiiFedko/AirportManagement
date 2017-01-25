@@ -30,19 +30,19 @@
             <Label text="Sex" GridPane.rowIndex="5" />
             <Label text="Class type" GridPane.rowIndex="6" />
             <Label text="Flight number" GridPane.rowIndex="7" />
-            <TextField fx:id="firstName" GridPane.columnIndex="1" />
-            <TextField fx:id="lastName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="nationality" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="birthday" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="passport" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="sex" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField fx:id="classType" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField fx:id="flightNum" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="firstName" promptText="First name" GridPane.columnIndex="1" />
+            <TextField fx:id="lastName" promptText="Last name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="nationality" promptText="Nationality" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="birthday" promptText="Birthday" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="passport" promptText="Passport" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="sex" promptText="Sex" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="classType" promptText="Class type" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="flightNum" promptText="Flight number" GridPane.columnIndex="1" GridPane.rowIndex="7" />
         </children>
     </GridPane>
         <HBox layoutX="197.1875" layoutY="241.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
             <children>
-                <Button layoutX="197.1875" layoutY="241.0" mnemonicParsing="false"  prefWidth="90.0" text="OK" />
+                <Button layoutX="197.1875" layoutY="241.0" mnemonicParsing="false"  prefWidth="90.0" text="OK" onAction="#handleOk" />
                 <Button layoutX="249.375" layoutY="241.0" mnemonicParsing="false"  prefWidth="90.0" text="Cancel" onAction="#handleCancelButton" />
             </children>
         </HBox>

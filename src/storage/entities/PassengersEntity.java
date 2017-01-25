@@ -19,6 +19,17 @@ public class PassengersEntity {
     public PassengersEntity() {
     }
 
+    public PassengersEntity(String firstName, String lastName, String nationality, String passport, String birthday, String sex, String classType, String flightNum) {
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.nationality = new SimpleStringProperty(nationality);
+        this.passport = new SimpleStringProperty(passport);
+        this.birthday = new SimpleStringProperty(birthday);
+        this.sex = new SimpleStringProperty(sex);
+        this.classType = new SimpleStringProperty(classType);
+        this.flightNum = new SimpleStringProperty(flightNum);
+    }
+
     public PassengersEntity(int id, String firstName, String lastName, String nationality, String passport, String birthday, String sex, String classType, String flightNum) {
         this.id = new SimpleIntegerProperty(id);
         this.firstName = new SimpleStringProperty(firstName);

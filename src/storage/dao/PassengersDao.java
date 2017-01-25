@@ -18,7 +18,7 @@ public interface PassengersDao {
 
     void deletePassenger(int id);
 
-    void createPassenger(PassengersEntity passengerInfo);
+    void addPassenger(PassengersEntity passengerInfo);
 
     void updatePassenger(PassengersEntity passengerInfo);
 }

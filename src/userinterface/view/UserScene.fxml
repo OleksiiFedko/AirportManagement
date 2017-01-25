@@ -16,9 +16,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.Cursor?>
-
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.ProgressIndicator?>
