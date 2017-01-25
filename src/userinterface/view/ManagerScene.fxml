@@ -23,7 +23,7 @@
                 <Tab text="Flights information">
                     <content>
                         <BorderPane></BorderPane>
-                        <fx:include fx:id="flightLayout" source="FlightLayout.fxml"/>
+                        <fx:include fx:id="flightLayout" source="UserScene.fxml"/>
                     </content>
                 </Tab>
                 <Tab text="Passengers information">

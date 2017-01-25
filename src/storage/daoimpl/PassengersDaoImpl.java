@@ -16,16 +16,17 @@ public class PassengersDaoImpl extends DataBaseUtil implements PassengersDao{
     private Connection con;
     private PreparedStatement prst;
     private ResultSet rs;
-    private String query = "SELECT idPassenger, " +
-            "FirstName, LastName, " +
-            "Nationality, Passport, " +
-            "Birthday, Sex, " +
-            "ClassType, FlightNumber FROM PassengersInfo";
+    private String query;
 
     private List<PassengersEntity> passengersList = new ArrayList<>();
 
     @Override
     public List<PassengersEntity> getAllPassengersInfo() {
+        query = "SELECT idPassenger, " +
+                "FirstName, LastName, " +
+                "Nationality, Passport, " +
+                "Birthday, Sex, " +
+                "ClassType, FlightNumber FROM PassengersInfo";
         try{
             con = getConnectionDb();
             if(con != null) {
@@ -104,12 +105,66 @@ public class PassengersDaoImpl extends DataBaseUtil implements PassengersDao{
 
     @Override
     public void deletePassenger(int id) {
-
+        query = "DELETE FROM PassengersInfo WHERE idPassenger = ?";
+        try {
+            con = getConnectionDb();
+            if (con != null) {
+                prst = con.prepareStatement(query);
+                prst.setInt(1, id);
+                prst.executeUpdate();
+            }
+        } catch (SQLException sqlE) {
+            System.out.printf("Connection problem");
+            System.out.println(sqlE);
+        } finally {
+            try {
+                if (con != null) {
+                    prst.close();
+                }
+            } catch (SQLException se) { /*can't do anything */ }
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException se) { /*can't do anything */ }
+        }
     }
 
     @Override
-    public void createPassenger(PassengersEntity passengerInfo) {
-
+    public void addPassenger(PassengersEntity currentPassenger) {
+        query = "INSERT INTO PassengersInfo (FirstName, LastName, " +
+                        "Nationality, Birthday, Passport, Sex, " +
+                        "ClassType, FlightNumber)" +
+                "VALUES (? ,?, ?, ?, ?, ?, ?, ?)";
+        try {
+            con = getConnectionDb();
+            if (con != null) {
+                prst = con.prepareStatement(query);
+                prst.setString(1, currentPassenger.getFirstName());
+                prst.setString(2, currentPassenger.getLastName());
+                prst.setString(3, currentPassenger.getNationality());
+                prst.setString(4, currentPassenger.getPassport());
+                prst.setString(5, currentPassenger.getBirthday());
+                prst.setString(6, currentPassenger.getSex());
+                prst.setString(7, currentPassenger.getClassType());
+                prst.setString(8, currentPassenger.getFlightNum());
+                prst.executeUpdate();
+            }
+        } catch (SQLException sqlE) {
+            System.out.printf("Connection problem");
+        } finally {
+            try {
+                if (con != null) {
+                    prst.close();
+                }
+            } catch (SQLException se) { /*can't do anything */ }
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException se) { /*can't do anything */ }
+        }
+        passengersList.add(currentPassenger);
     }
 
     @Override
