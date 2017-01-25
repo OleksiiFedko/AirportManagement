@@ -1,11 +1,7 @@
 package userinterface.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import storage.daoimpl.PassengersDaoImpl;
-import storage.entities.PassengersEntity;
 
 public class PassengersDeletingController {
     private Stage dialogStage;
@@ -21,8 +17,9 @@ public class PassengersDeletingController {
     }
 
     @FXML
-    public void handleOk() {
-
+    public void handleOkDelete() {
+        okClicked = true;
+        dialogStage.close();
     }
 
     public boolean isOkClicked() {

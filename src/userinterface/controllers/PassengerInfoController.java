@@ -43,7 +43,7 @@ public class PassengerInfoController extends Controller implements Initializable
     @FXML private TextField lastNameField;
     @FXML private TextField passportField;
 
-    @FXML protected TableView<PassengersEntity> passengersTable;
+    @FXML private TableView<PassengersEntity> passengersTable;
     @FXML private TableColumn<ObservableList<PassengersEntity>, String> numberColumn;
     @FXML private TableColumn<PassengersEntity, String> firstNameColumn;
     @FXML private TableColumn<PassengersEntity, String> lastNameColumn;
@@ -117,107 +117,168 @@ public class PassengerInfoController extends Controller implements Initializable
     @FXML
     public void handleAddPassenger() {
         try {
-            // Загружаем fxml-файл и создаём новую сцену
-            // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/PassengerAdding.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
-            // Создаём диалоговое окно Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Passenger adding");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(mainApp.getMainAppWindow());
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
-            // Передаём адресата в контроллер.
             PassengersAddingController pAController = loader.getController();
             pAController.setDialogStage(dialogStage);
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
-
             scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
                 @Override
                 public void handle(KeyEvent event) {
                     if (keyCombClose.match(event)) {
                         dialogStage.close();
                     } else if (keyCombOk.match(event)) {
-                        pAController.handleOk();
+                        pAController.handleOkAdd();
                     }
                 }
             });
-
             dialogStage.showAndWait();
-
-
-//            return true;
+            showPassengersInfo();
         } catch (IOException e) {
             e.printStackTrace();
-//            return false;
         }
     }
 
     @FXML
     public void handleEditPassenger() {
         try {
-            // Загружаем fxml-файл и создаём новую сцену
-            // для всплывающего диалогового окна.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/PassengerEditing.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-            // Создаём диалоговое окно Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Passenger adding");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(mainApp.getMainAppWindow());
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-            // Передаём адресата в контроллер.
-            PassengersEditingController pEController = loader.getController();
-            pEController.setDialogStage(dialogStage);
-            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
-            dialogStage.showAndWait();
-//            return true;
+            PassengersEntity markedPassenger = passengersTable.getSelectionModel().getSelectedItem();
+            if(markedPassenger != null) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource("view/PassengerEditing.fxml"));
+                AnchorPane page = (AnchorPane) loader.load();
+                Stage dialogStage = new Stage();
+                dialogStage.setTitle("Passenger adding");
+                dialogStage.initModality(Modality.WINDOW_MODAL);
+                dialogStage.initOwner(mainApp.getMainAppWindow());
+                Scene scene = new Scene(page);
+                dialogStage.setScene(scene);
+                PassengersEditingController pEController = loader.getController();
+                pEController.setDialogStage(dialogStage);
+
+                scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent event) {
+                        if (keyCombClose.match(event)) {
+                            dialogStage.close();
+                        } else if (keyCombOk.match(event)) {
+                            pEController.handleOkEdit();
+                        }
+                    }
+                });
+
+                pEController.setCurrentPassenger(markedPassenger);
+                pEController.setFirstName(markedPassenger.getFirstName());
+                pEController.setLastName(markedPassenger.getLastName());
+                pEController.setNationality(markedPassenger.getNationality());
+                pEController.setPassport(markedPassenger.getPassport());
+                pEController.setBirthday(markedPassenger.getBirthday());
+                pEController.setSex(markedPassenger.getSex());
+                pEController.setClassType(markedPassenger.getClassType());
+                pEController.setFlightNum(markedPassenger.getFlightNum());
+                dialogStage.showAndWait();
+                showPassengersInfo();
+            } else {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource("view/ErrorLayout.fxml"));
+                AnchorPane page = (AnchorPane) loader.load();
+                Stage dialogStage = new Stage();
+                dialogStage.setTitle("ERROR");
+                dialogStage.initModality(Modality.WINDOW_MODAL);
+                dialogStage.initOwner(mainApp.getMainAppWindow());
+                Scene scene = new Scene(page);
+                dialogStage.setScene(scene);
+                ErrorController errorController = loader.getController();
+                errorController.setDialogStage(dialogStage);
+                errorController.setErrorLabel("Please choose passenger for editing!");
+
+                scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent event) {
+                        if (keyCombOk.match(event)) {
+                            errorController.handleOkError();
+                        }
+                    }
+                });
+
+                dialogStage.showAndWait();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
-//            return false;
         }
     }
 
     @FXML
     public void handleDeletePassenger() {
         try {
-            // Загружаем fxml-файл и создаём новую сцену
-            // для всплывающего диалогового окна.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/PassengerDeleting.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-            // Создаём диалоговое окно Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Delete passenger");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(mainApp.getMainAppWindow());
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-            // Передаём адресата в контроллер.
-            PassengersDeletingController pDController = loader.getController();
-            pDController.setDialogStage(dialogStage);
-            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+            boolean okClicked;
+            PassengersEntity selectedPassenger = passengersTable.getSelectionModel().getSelectedItem();
+            if(selectedPassenger != null) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource("view/PassengerDeleting.fxml"));
+                AnchorPane page = (AnchorPane) loader.load();
+                Stage dialogStage = new Stage();
+                dialogStage.setTitle("Delete passenger");
+                dialogStage.initModality(Modality.WINDOW_MODAL);
+                dialogStage.initOwner(mainApp.getMainAppWindow());
+                Scene scene = new Scene(page);
+                dialogStage.setScene(scene);
+                PassengersDeletingController pDController = loader.getController();
+                pDController.setDialogStage(dialogStage);
 
-//            scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
-//                @Override
-//                public void handle(KeyEvent event) {
-//                    if (keyCombClose.match(event)) {
-//                        dialogStage.close();
-//                    } else if (keyCombOk.match(event)) {
-//                        pDController.handleOk();
-//                    }
-//                }
-//            });
+                scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent event) {
+                        if (keyCombClose.match(event)) {
+                            dialogStage.close();
+                        } else if (keyCombOk.match(event)) {
+                            pDController.handleOkDelete();
+                        }
+                    }
+                });
 
-            dialogStage.showAndWait();
-//            return true;
+                dialogStage.showAndWait();
+                PassengersDaoImpl passengersDao = new PassengersDaoImpl();
+                okClicked = pDController.isOkClicked();
+                if(okClicked){
+                    passengersDao.deletePassenger(selectedPassenger.getId());
+                }
+                showPassengersInfo();
+            } else {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource("view/ErrorLayout.fxml"));
+                AnchorPane page = (AnchorPane) loader.load();
+                Stage dialogStage = new Stage();
+                dialogStage.setTitle("ERROR");
+                dialogStage.initModality(Modality.WINDOW_MODAL);
+                dialogStage.initOwner(mainApp.getMainAppWindow());
+                Scene scene = new Scene(page);
+                dialogStage.setScene(scene);
+                ErrorController errorController = loader.getController();
+                errorController.setDialogStage(dialogStage);
+                errorController.setErrorLabel("Please choose passenger for deleting!");
+
+                scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent event) {
+                        if (keyCombOk.match(event)) {
+                            errorController.handleOkError();
+                        }
+                    }
+                });
+
+                dialogStage.showAndWait();
+            }
         } catch (IOException e) {
             e.printStackTrace();
-//            return false;
         }
     }
 
@@ -270,4 +331,5 @@ public class PassengerInfoController extends Controller implements Initializable
     public TableView<PassengersEntity> getPassengersTable() {
         return passengersTable;
     }
+
 }

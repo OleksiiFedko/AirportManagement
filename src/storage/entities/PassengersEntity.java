@@ -55,7 +55,7 @@ public class PassengersEntity {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName.set(firstName);
+        this.firstName = new SimpleStringProperty(firstName);
     }
 
     public String getLastName() {
@@ -63,7 +63,7 @@ public class PassengersEntity {
     }
 
     public void setLastName(String lastName) {
-        this.lastName.set(lastName);
+        this.lastName = new SimpleStringProperty(lastName);
     }
 
     public String getNationality() {
@@ -71,7 +71,7 @@ public class PassengersEntity {
     }
 
     public void setNationality(String nationality) {
-        this.nationality.set(nationality);
+        this.nationality = new SimpleStringProperty(nationality);
     }
 
     public String getPassport() {
@@ -79,7 +79,7 @@ public class PassengersEntity {
     }
 
     public void setPassport(String passport) {
-        this.passport.set(passport);
+        this.passport = new SimpleStringProperty(passport);
     }
 
     public String getBirthday() {
@@ -87,7 +87,7 @@ public class PassengersEntity {
     }
 
     public void setBirthday(String birthday) {
-        this.birthday.set(birthday);
+        this.birthday = new SimpleStringProperty(birthday);
     }
 
     public String getSex() {
@@ -95,7 +95,7 @@ public class PassengersEntity {
     }
 
     public void setSex(String sex) {
-        this.sex.set(sex);
+        this.sex = new SimpleStringProperty(sex);
     }
 
     public String getClassType() {
@@ -103,7 +103,7 @@ public class PassengersEntity {
     }
 
     public void setClassType(String classType) {
-        this.classType.set(classType);
+        this.classType = new SimpleStringProperty(classType);
     }
 
     public String getFlightNum() {
@@ -111,7 +111,7 @@ public class PassengersEntity {
     }
 
     public void setFlightNum(String flightNum) {
-        this.flightNum.set(flightNum);
+        this.flightNum = new SimpleStringProperty(flightNum);
     }
 
     public IntegerProperty idProperty(){

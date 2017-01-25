@@ -1,9 +1,9 @@
-package adminInterface;
+package userinterface.controllers;
 
 /**
  * Created by Alish on 07.12.2016.
  */
-public class Flights {
+public class FlightsController {
 
     private int idFlight;
     private double arivalTime;
@@ -15,8 +15,8 @@ public class Flights {
     private String cityPortOfDeparture;
     private String cityPortOfArival;
 
-    public Flights(int idFlight, double arivalTime, double departureTime, int flightNumber, String flightStatus,
-                   int gate, String terminal,String cityPortOfDeparture, String cityPortOfArival){
+    public FlightsController(int idFlight, double arivalTime, double departureTime, int flightNumber, String flightStatus,
+                   int gate, String terminal, String cityPortOfDeparture, String cityPortOfArival){
         this.idFlight = idFlight;
         this.arivalTime = arivalTime;
         this.departureTime = departureTime;

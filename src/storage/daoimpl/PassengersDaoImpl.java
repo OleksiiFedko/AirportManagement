@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PassengersDaoImpl extends DataBaseUtil implements PassengersDao{
+public class PassengersDaoImpl extends DataBaseUtil implements PassengersDao {
     private Connection con;
     private PreparedStatement prst;
     private ResultSet rs;
@@ -27,9 +27,9 @@ public class PassengersDaoImpl extends DataBaseUtil implements PassengersDao{
                 "Nationality, Passport, " +
                 "Birthday, Sex, " +
                 "ClassType, FlightNumber FROM PassengersInfo";
-        try{
+        try {
             con = getConnectionDb();
-            if(con != null) {
+            if (con != null) {
                 prst = con.prepareStatement(query);
                 rs = prst.executeQuery();
                 if (!rs.isBeforeFirst()) {
@@ -60,34 +60,41 @@ public class PassengersDaoImpl extends DataBaseUtil implements PassengersDao{
                     passengersList.add(currentPassenger);
                 }
             }
-        } catch (SQLException sqlE){
+        } catch (SQLException sqlE) {
             System.out.printf("Connection problem");
         } finally {
-            try { if(con!=null){con.close();} } catch(SQLException se) { /*can't do anything */ }
-            try { if(con!=null){prst.close();} } catch(SQLException se) { /*can't do anything */ }
-            try { if(con!=null){rs.close();} } catch(SQLException se) { /*can't do anything */ }
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException se) { /*can't do anything */ }
+            try {
+                if (con != null) {
+                    prst.close();
+                }
+            } catch (SQLException se) { /*can't do anything */ }
+            try {
+                if (con != null) {
+                    rs.close();
+                }
+            } catch (SQLException se) { /*can't do anything */ }
 
         }
         return passengersList;
     }
 
-    public List<PassengersEntity> getAllFilteredPassengers(List<GuiFilter> filtersList){
+    public List<PassengersEntity> getAllFilteredPassengers(List<GuiFilter> filtersList) {
         ArrayList<String> filterValuers = new ArrayList<>();
-        filtersList.forEach(filter->{
-            if (filter.getSelectedValue()!=null) {
+        filtersList.forEach(filter -> {
+            if (filter.getSelectedValue() != null) {
                 String filteredString;
                 filterValuers.add(filter.getSelectedValue());
-//                String tableShortName = "a.";
-//                if (filter.getSqlField().equals("ClassType") || filter.getSqlField().equals("Price")){
-//                    tableShortName = "b.";
-//                }
                 if (filterValuers.size() == 1) {
-                    filteredString = " WHERE " + filter.getSqlField() + "='"+ filter.getSelectedValue()+"'";
+                    filteredString = " WHERE " + filter.getSqlField() + "='" + filter.getSelectedValue() + "'";
                 } else {
-                    filteredString = " AND " + filter.getSqlField() + "='"+ filter.getSelectedValue()+"'";
+                    filteredString = " AND " + filter.getSqlField() + "='" + filter.getSelectedValue() + "'";
                 }
-                query = query+filteredString;
-                // System.out.println(query)
+                query = query + filteredString;
             }
         });
         return getAllPassengersInfo();
@@ -132,9 +139,9 @@ public class PassengersDaoImpl extends DataBaseUtil implements PassengersDao{
 
     @Override
     public void addPassenger(PassengersEntity currentPassenger) {
-        query = "INSERT INTO PassengersInfo (FirstName, LastName, " +
-                        "Nationality, Birthday, Passport, Sex, " +
-                        "ClassType, FlightNumber)" +
+        String query = "INSERT INTO PassengersInfo (FirstName, LastName, " +
+                "Nationality, Birthday, Passport, Sex, " +
+                "ClassType, FlightNumber)" +
                 "VALUES (? ,?, ?, ?, ?, ?, ?, ?)";
         try {
             con = getConnectionDb();
@@ -155,20 +162,57 @@ public class PassengersDaoImpl extends DataBaseUtil implements PassengersDao{
         } finally {
             try {
                 if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException se) { /*can't do anything */ }
+            try {
+                if (con != null) {
                     prst.close();
                 }
             } catch (SQLException se) { /*can't do anything */ }
+            passengersList.add(currentPassenger);
+
+        }
+    }
+
+
+    @Override
+    public void updatePassenger(PassengersEntity passengersEntity) {
+        query = "UPDATE PassengersInfo SET FirstName = ?, LastName = ?, Nationality = ?," +
+                "Passport =?, Birthday = ?, Sex = ?," +
+                "ClassType = ?, FlightNumber = ?" +
+                "WHERE idPassenger=?";
+        try {
+            con = getConnectionDb();
+            if (con != null) {
+                prst = con.prepareStatement(query);
+                prst.setString(1, passengersEntity.getFirstName());
+                prst.setString(2, passengersEntity.getLastName());
+                prst.setString(3, passengersEntity.getNationality());
+                prst.setString(4, passengersEntity.getPassport());
+                prst.setString(5, passengersEntity.getBirthday());
+                prst.setString(6, passengersEntity.getSex());
+                prst.setString(7, passengersEntity.getClassType());
+                prst.setString(8, passengersEntity.getFlightNum());
+                prst.setInt(9, passengersEntity.getId());
+
+                prst.executeUpdate();
+            }
+        } catch (SQLException sqlE) {
+            System.out.printf("Connection problem");
+            System.out.println(sqlE);
+        } finally {
             try {
                 if (con != null) {
                     con.close();
                 }
             } catch (SQLException se) { /*can't do anything */ }
+            try {
+                if (con != null) {
+                    prst.close();
+                }
+            } catch (SQLException se) { /*can't do anything */ }
+
         }
-        passengersList.add(currentPassenger);
-    }
-
-    @Override
-    public void updatePassenger(PassengersEntity passengerInfo) {
-
     }
 }
