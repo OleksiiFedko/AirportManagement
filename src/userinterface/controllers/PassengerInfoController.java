@@ -23,6 +23,7 @@ import storage.daoimpl.FiltersDaoImpl;
 import storage.daoimpl.PassengersDaoImpl;
 import storage.entities.PassengersEntity;
 import userinterface.MainApp;
+import userinterface.utils.DateUtils;
 import userinterface.utils.SplitPaneDividerSlider;
 
 import java.io.IOException;
@@ -128,7 +129,7 @@ public class PassengerInfoController extends Controller implements Initializable
             dialogStage.setScene(scene);
             PassengersAddingController pAController = loader.getController();
             pAController.setDialogStage(dialogStage);
-            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+
             scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
                 @Override
                 public void handle(KeyEvent event) {
@@ -139,6 +140,7 @@ public class PassengerInfoController extends Controller implements Initializable
                     }
                 }
             });
+
             dialogStage.showAndWait();
             showPassengersInfo();
         } catch (IOException e) {
@@ -149,8 +151,8 @@ public class PassengerInfoController extends Controller implements Initializable
     @FXML
     public void handleEditPassenger() {
         try {
-            PassengersEntity markedPassenger = passengersTable.getSelectionModel().getSelectedItem();
-            if(markedPassenger != null) {
+            PassengersEntity selectedPassenger = passengersTable.getSelectionModel().getSelectedItem();
+            if(selectedPassenger != null) {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(MainApp.class.getResource("view/PassengerEditing.fxml"));
                 AnchorPane page = (AnchorPane) loader.load();
@@ -174,15 +176,20 @@ public class PassengerInfoController extends Controller implements Initializable
                     }
                 });
 
-                pEController.setCurrentPassenger(markedPassenger);
-                pEController.setFirstName(markedPassenger.getFirstName());
-                pEController.setLastName(markedPassenger.getLastName());
-                pEController.setNationality(markedPassenger.getNationality());
-                pEController.setPassport(markedPassenger.getPassport());
-                pEController.setBirthday(markedPassenger.getBirthday());
-                pEController.setSex(markedPassenger.getSex());
-                pEController.setClassType(markedPassenger.getClassType());
-                pEController.setFlightNum(markedPassenger.getFlightNum());
+                pEController.setCurrentPassenger(selectedPassenger);
+                pEController.setFirstName(selectedPassenger.getFirstName());
+                pEController.setLastName(selectedPassenger.getLastName());
+                pEController.setNationality(selectedPassenger.getNationality());
+                pEController.setPassport(selectedPassenger.getPassport());
+                DateUtils.parseDate(pEController, selectedPassenger.getBirthday());
+                pEController.setDayBox(pEController.getDay());
+                pEController.setMonthBox(pEController.getMonth());
+                pEController.setYearBox(pEController.getYear());
+                pEController.setDayBoxItems(pEController.getMonth(), pEController.getYear());
+                pEController.setSex(selectedPassenger.getSex());
+                pEController.setClassType(selectedPassenger.getClassType());
+                pEController.setFlightNum(selectedPassenger.getFlightNum());
+
                 dialogStage.showAndWait();
                 showPassengersInfo();
             } else {

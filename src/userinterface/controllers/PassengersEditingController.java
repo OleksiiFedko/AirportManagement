@@ -1,27 +1,70 @@
 package userinterface.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import storage.daoimpl.ClassTypeDaoImpl;
+import storage.daoimpl.FlightsDaoImpl;
 import storage.daoimpl.PassengersDaoImpl;
 import storage.entities.PassengersEntity;
+import userinterface.utils.DateUtils;
 
-public class PassengersEditingController {
+import java.io.DataInput;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class PassengersEditingController implements Initializable {
     @FXML private TextField firstName;
     @FXML private TextField lastName;
     @FXML private TextField nationality;
     @FXML private TextField passport;
-    @FXML private TextField birthday;
-    @FXML private TextField sex;
-    @FXML private TextField classType;
-    @FXML private TextField flightNum;
+    @FXML private String birthday;
+    @FXML private ComboBox sex;
+    @FXML private ComboBox classType;
+    @FXML private ComboBox flightNum;
+    @FXML private ComboBox dayBox;
+    @FXML private ComboBox monthBox;
+    @FXML private ComboBox yearBox;
+
+    private String day;
+    private String month;
+    private String year;
 
     private Stage dialogStage;
     private PassengersEntity currentPassenger;
 
+    private ObservableList<String> sexList = FXCollections.observableArrayList();
+    private ObservableList<String> classTypeList = FXCollections.observableArrayList();
+    private ObservableList<String> flightNumList = FXCollections.observableArrayList();
+
+    private ClassTypeDaoImpl classTypeDao = new ClassTypeDaoImpl();
+    private FlightsDaoImpl flightsDao = new FlightsDaoImpl();
+
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        sexList.add("Woman");
+        sexList.add("Man");
+        sex.setItems(sexList);
+        classTypeList.addAll(classTypeDao.getClassType());
+        classType.setItems(classTypeList);
+        flightNumList.addAll(flightsDao.getAllFightNumbers());
+        flightNum.setItems(flightNumList);
+        monthBox.setItems(DateUtils.getMonthList());
+        yearBox.setItems(DateUtils.getYearList());
+    }
+
+    public void setDayBoxItems(String month, String year){
+        dayBox.setItems(DateUtils.getDayList(month, year));
     }
 
     @FXML
@@ -31,19 +74,22 @@ public class PassengersEditingController {
 
     @FXML
     public void handleOkEdit(){
-        currentPassenger.setFirstName(firstName.getText());
-        currentPassenger.setLastName(lastName.getText());
-        currentPassenger.setNationality(nationality.getText());
-        currentPassenger.setPassport(passport.getText());
-        currentPassenger.setBirthday(birthday.getText());
-        currentPassenger.setSex(sex.getText());
-        currentPassenger.setClassType(classType.getText());
-        currentPassenger.setFlightNum(flightNum.getText());
+        if(isInputValid()) {
+            birthday = dayBox.getValue() + "." + monthBox.getValue() + "." + yearBox.getValue();
+            currentPassenger.setFirstName(firstName.getText());
+            currentPassenger.setLastName(lastName.getText());
+            currentPassenger.setNationality(nationality.getText());
+            currentPassenger.setPassport(passport.getText());
+            currentPassenger.setBirthday(birthday);
+            currentPassenger.setSex((String) sex.getValue());
+            currentPassenger.setClassType((String) classType.getValue());
+            currentPassenger.setFlightNum((String) flightNum.getValue());
 
-        dialogStage.close();
+            dialogStage.close();
 
-        PassengersDaoImpl passengersDao = new PassengersDaoImpl();
-        passengersDao.updatePassenger(currentPassenger);
+            PassengersDaoImpl passengersDao = new PassengersDaoImpl();
+            passengersDao.updatePassenger(currentPassenger);
+        }
     }
 
     private boolean isInputValid() {
@@ -57,19 +103,25 @@ public class PassengersEditingController {
         if (nationality.getText() == null || nationality.getText().length() == 0) {
             errorMessage += "No valid nationality!\n";
         }
-        if (birthday.getText() == null || birthday.getText().length() == 0) {
-            errorMessage += "No valid birthday date!\n";
-        }
-        if (passport.getText() == null || passport.getText().length() == 0) {
+        if (passport.getText() == null || passport.getText().length() != 8) {
             errorMessage += "No valid passport!\n";
         }
-        if (sex.getText() == null || sex.getText().length() == 0) {
+        if (yearBox.getValue() == null) {
+            errorMessage += "No valid year!\n";
+        }
+        if (monthBox.getValue() == null) {
+            errorMessage += "No valid month!\n";
+        }
+        if (dayBox.getValue() == null) {
+            errorMessage += "No valid day!\n";
+        }
+        if (sex.getValue() == null) {
             errorMessage += "No valid sex!\n";
         }
-        if (classType.getText() == null || sex.getText().length() == 0) {
+        if (classType.getValue() == null) {
             errorMessage += "No valid class type!\n";
         }
-        if (flightNum.getText() == null || flightNum.getText().length() == 0) {
+        if (flightNum.getValue() == null) {
             errorMessage += "No valid flight number!\n";
         }
         if (errorMessage.length() == 0) {
@@ -106,7 +158,7 @@ public class PassengersEditingController {
     }
 
     public void setBirthday(String birthday) {
-        this.birthday.setText(birthday);
+        this.birthday = birthday;
     }
 
     public void setPassport(String passport) {
@@ -114,14 +166,67 @@ public class PassengersEditingController {
     }
 
     public void setSex(String sex) {
-        this.sex.setText(sex);
+        this.sex.setValue(sex);
     }
 
     public void setClassType(String classType) {
-        this.classType.setText(classType);
+        this.classType.setValue(classType);
     }
 
     public void setFlightNum(String flightNum) {
-        this.flightNum.setText(flightNum);
+        this.flightNum.setValue(flightNum);
+    }
+
+    public String getBirthday(){
+        return birthday;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+    public void setDayBox(String day) {
+        this.dayBox.setValue(day);
+    }
+
+    public void setMonthBox(String month){
+        this.monthBox.setValue(month);
+    }
+
+    public void setYearBox(String year){
+        this.yearBox.setValue(year);
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+
+
+    public String getDay() {
+        return day;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void isYearSelected(ActionEvent actionEvent) {
+        dayBox.getItems().clear();
+        dayBox.setValue(null);
+        dayBox.setItems(DateUtils.getDayList((String ) monthBox.getValue(),(String) yearBox.getValue()));
+    }
+
+    public void isMonthSelected(ActionEvent actionEvent) {
+        dayBox.getItems().clear();
+        dayBox.setValue(null);
+        dayBox.setItems(DateUtils.getDayList((String ) monthBox.getValue(),(String) yearBox.getValue()));
     }
 }

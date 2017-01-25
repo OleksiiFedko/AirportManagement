@@ -1,30 +1,65 @@
 package userinterface.controllers;
 
-import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import storage.daoimpl.ClassTypeDaoImpl;
+import storage.daoimpl.FlightsDaoImpl;
 import storage.daoimpl.PassengersDaoImpl;
 import storage.entities.PassengersEntity;
+import userinterface.utils.DateUtils;
 
-public class PassengersAddingController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class PassengersAddingController implements Initializable{
     @FXML private TextField firstName;
     @FXML private TextField lastName;
     @FXML private TextField nationality;
-    @FXML private TextField birthday;
+    @FXML private String birthday;
     @FXML private TextField passport;
-    @FXML private TextField sex;
-    @FXML private TextField classType;
-    @FXML private TextField flightNum;
+    @FXML private ComboBox sex;
+    @FXML private ComboBox classType;
+    @FXML private ComboBox flightNum;
+    @FXML private ComboBox dayBox;
+    @FXML private ComboBox monthBox;
+    @FXML private ComboBox yearBox;
 
     private Stage dialogStage;
     private boolean okClicked = false;
 
+    private ObservableList<String> sexList = FXCollections.observableArrayList();
+    private ObservableList<String> classTypeList = FXCollections.observableArrayList();
+    private ObservableList<String> flightNumList = FXCollections.observableArrayList();
+
+    private ClassTypeDaoImpl classTypeDao = new ClassTypeDaoImpl();
+    private FlightsDaoImpl flightsDao = new FlightsDaoImpl();
+
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
-      }
+    }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        sexList.add("Woman");
+        sexList.add("Man");
+        classTypeList.addAll(classTypeDao.getClassType());
+        flightNumList.addAll(flightsDao.getAllFightNumbers());
+        sex.setItems(sexList);
+        classType.setItems(classTypeList);
+        flightNum.setItems(flightNumList);
+        monthBox.setItems(DateUtils.getMonthList());
+        yearBox.setItems(DateUtils.getYearList());
+        monthBox.setVisible(false);
+        dayBox.setVisible(false);
+
+    }
 
     @FXML
     public void handleCancelButton() {
@@ -37,21 +72,14 @@ public class PassengersAddingController {
     @FXML
     public void handleOkAdd() {
         if(isInputValid()) {
-            PassengersEntity currentPassenger = new PassengersEntity(firstName.getText(), lastName.getText(), nationality.getText(), birthday.getText(),
-                    passport.getText(), sex.getText(), classType.getText(), flightNum.getText());
+            birthday = dayBox.getValue() + "." + monthBox.getValue() + "." + yearBox.getValue();
+            PassengersEntity currentPassenger = new PassengersEntity(firstName.getText(), lastName.getText(), nationality.getText(), birthday,
+                    passport.getText(), (String) sex.getValue(), (String) classType.getValue(), (String) flightNum.getValue());
             dialogStage.close();
             PassengersDaoImpl passengersDao = new PassengersDaoImpl();
             passengersDao.addPassenger(currentPassenger);
             okClicked = true;
         }
-//        if(isInputValid()){
-        PassengersEntity currentPassenger = new PassengersEntity(firstName.getText(), lastName.getText(), nationality.getText(), birthday.getText(),
-                passport.getText(), sex.getText(), classType.getText(), flightNum.getText());
-//        }
-        dialogStage.close();
-        PassengersDaoImpl passengersDao = new PassengersDaoImpl();
-        passengersDao.addPassenger(currentPassenger);
-        okClicked = true;
     }
 
     public boolean isOkClicked() {
@@ -75,19 +103,25 @@ public class PassengersAddingController {
         if (nationality.getText() == null || nationality.getText().length() == 0) {
             errorMessage += "No valid nationality!\n";
         }
-        if (birthday.getText() == null || birthday.getText().length() == 0) {
-            errorMessage += "No valid birthday!\n";
-        }
-        if (passport.getText() == null || passport.getText().length() == 0) {
+        if (passport.getText() == null || passport.getText().length() != 8) {
             errorMessage += "No valid passport!\n";
         }
-        if (sex.getText() == null || sex.getText().length() == 0) {
+        if (yearBox.getValue() == null) {
+            errorMessage += "No valid year!\n";
+        }
+        if (monthBox.getValue() == null) {
+            errorMessage += "No valid month!\n";
+        }
+        if (dayBox.getValue() == null) {
+            errorMessage += "No valid day!\n";
+        }
+        if (sex.getValue() == null) {
             errorMessage += "No valid sex!\n";
         }
-        if (classType.getText() == null || sex.getText().length() == 0) {
+        if (classType.getValue() == null) {
             errorMessage += "No valid class type!\n";
         }
-        if (flightNum.getText() == null || flightNum.getText().length() == 0) {
+        if (flightNum.getValue() == null) {
             errorMessage += "No valid flight number!\n";
         }
         if (errorMessage.length() == 0) {
@@ -103,4 +137,26 @@ public class PassengersAddingController {
             return false;
         }
     }
+
+
+    public void isYearSelected(ActionEvent actionEvent) {
+        if(yearBox.getValue() != null && monthBox.getValue() == null){
+            monthBox.setVisible(true);
+        }
+        if(yearBox.getValue() != null && monthBox.getValue() != null){
+            dayBox.getItems().clear();
+            dayBox.setValue(null);
+            dayBox.setItems(DateUtils.getDayList((String ) monthBox.getValue(),(String) yearBox.getValue()));
+        }
+    }
+
+    public void isMonthSelected(ActionEvent actionEvent) {
+        if(monthBox.getValue() != null ){
+            dayBox.getItems().clear();
+            dayBox.setValue(null);
+            dayBox.setItems(DateUtils.getDayList((String ) monthBox.getValue(),(String) yearBox.getValue()));
+            dayBox.setVisible(true);
+        }
+    }
 }
+

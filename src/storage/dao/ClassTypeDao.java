@@ -9,7 +9,7 @@ public interface ClassTypeDao {
     /**
      * @return list that contains all class types
      */
-    List<ClassTypeEntity> getClassType();
+    List<String> getClassType();
 
     void deleteClassType(String className);
 

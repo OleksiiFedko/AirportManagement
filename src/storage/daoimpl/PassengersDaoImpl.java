@@ -16,17 +16,16 @@ public class PassengersDaoImpl extends DataBaseUtil implements PassengersDao {
     private Connection con;
     private PreparedStatement prst;
     private ResultSet rs;
-    private String query;
+    private String query = "SELECT idPassenger, " +
+            "FirstName, LastName, " +
+            "Nationality, Passport, " +
+            "Birthday, Sex, " +
+            "ClassType, FlightNumber FROM PassengersInfo";
 
     private List<PassengersEntity> passengersList = new ArrayList<>();
 
     @Override
     public List<PassengersEntity> getAllPassengersInfo() {
-        query = "SELECT idPassenger, " +
-                "FirstName, LastName, " +
-                "Nationality, Passport, " +
-                "Birthday, Sex, " +
-                "ClassType, FlightNumber FROM PassengersInfo";
         try {
             con = getConnectionDb();
             if (con != null) {
@@ -112,7 +111,7 @@ public class PassengersDaoImpl extends DataBaseUtil implements PassengersDao {
 
     @Override
     public void deletePassenger(int id) {
-        query = "DELETE FROM PassengersInfo WHERE idPassenger = ?";
+        String query = "DELETE FROM PassengersInfo WHERE idPassenger = ?";
         try {
             con = getConnectionDb();
             if (con != null) {
@@ -175,10 +174,9 @@ public class PassengersDaoImpl extends DataBaseUtil implements PassengersDao {
         }
     }
 
-
     @Override
     public void updatePassenger(PassengersEntity passengersEntity) {
-        query = "UPDATE PassengersInfo SET FirstName = ?, LastName = ?, Nationality = ?," +
+        String query = "UPDATE PassengersInfo SET FirstName = ?, LastName = ?, Nationality = ?," +
                 "Passport =?, Birthday = ?, Sex = ?," +
                 "ClassType = ?, FlightNumber = ?" +
                 "WHERE idPassenger=?";

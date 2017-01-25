@@ -22,6 +22,7 @@ public class FlightsDaoImpl extends DataBaseUtil implements FlightsDao {
             "b.ClassType, b.Price FROM Flights a INNER JOIN PriceList b ON a.FlightNumber = b.FlightNumber";
 
     private List<FlightsEntity> flightsList = new ArrayList<>();
+    private List<String> flightNumbers = new ArrayList<>();
 
     @Override
     public List<FlightsEntity> getAllFlights() {
@@ -92,6 +93,32 @@ public class FlightsDaoImpl extends DataBaseUtil implements FlightsDao {
         });
 
         return getAllFlights();
+    }
+
+    @Override
+    public List<String> getAllFightNumbers(){
+        String query = "SELECT DISTINCT  FlightNumber FROM Flights";
+        try {
+            con = getConnectionDb();
+            if (con != null){
+                pstmt = con.prepareStatement(query);
+                rs = pstmt.executeQuery();
+                if (!rs.isBeforeFirst() ) {
+                    System.out.println("No data");
+                }
+                while (rs.next()) {
+                    String flightNumber = rs.getString(1);
+                    flightNumbers.add(flightNumber);
+                }
+            }
+        } catch (SQLException sqlEx) {
+            System.out.println("Problems with connection");
+        } finally {
+            try { if(con!=null){con.close();} } catch(SQLException se) { /*can't do anything */ }
+            try { if(con!=null){pstmt.close();} } catch(SQLException se) { /*can't do anything */ }
+            try { if(con!=null){rs.close();} } catch(SQLException se) { /*can't do anything */ }
+        }
+        return flightNumbers;
     }
 
     @Override

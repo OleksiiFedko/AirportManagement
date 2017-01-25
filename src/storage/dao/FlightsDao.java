@@ -35,6 +35,12 @@ public interface FlightsDao {
      */
     List<FlightsEntity> getFlightByDepartureArival(String cityOfArrival, String cityOfDeparture);
 
+    /**
+     *
+     * @return list of all different flight numbers
+     */
+    List<String> getAllFightNumbers();
+
     void deleteFLight(FlightsEntity flightsEntity);
 
     void createFlight(FlightsEntity flightsEntity);
