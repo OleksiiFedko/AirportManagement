@@ -6,23 +6,22 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import storage.dao.RootsDao;
 import storage.daoimpl.FiltersDaoImpl;
-import storage.daoimpl.PassengersDaoImpl;
 import storage.daoimpl.RootsDaoImpl;
-import storage.entities.PassengersEntity;
 import storage.entities.RootsEntity;
 import userinterface.MainApp;
 import userinterface.utils.SplitPaneDividerSlider;
@@ -42,19 +41,17 @@ public class EmployeeInfoController extends Controller implements Initializable 
 
     private Stage stage;
     private MainApp mainApp;
-
-
+    private KeyCombination keyCombClose = new KeyCodeCombination(KeyCode.ESCAPE);
+    private KeyCombination keyCombOk = new KeyCodeCombination(KeyCode.ENTER);
 
     @FXML private TextField rootField;
     @FXML private TextField loginField;
-
 
     @FXML private TableView<RootsEntity> employeeTable;
     @FXML private TableColumn<ObservableList<RootsEntity>, String> idRootsColumn;
     @FXML private TableColumn<RootsEntity, String> rootNameColumn;
     @FXML private TableColumn<RootsEntity, String> loginColumn;
     @FXML private TableColumn<RootsEntity, String> passwordColumn;
-
 
     @FXML private AnchorPane leftFilters;
     @FXML private ToggleButton leftToggleButton;
@@ -103,7 +100,6 @@ public class EmployeeInfoController extends Controller implements Initializable 
                 cellData -> cellData.getValue().passwordProperty());
     }
 
-
     public void handleAddEmployee(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -111,19 +107,164 @@ public class EmployeeInfoController extends Controller implements Initializable 
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Add Employee");
+            dialogStage.setTitle("Edit Employee");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(mainApp.getMainAppWindow());
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
             // Передаём адресата в контроллер.
-            EmployeeAddController eMcontroller = loader.getController();
-            eMcontroller.setDialogStage(dialogStage);
+            EmployeeAddController eMAddController = loader.getController();
+            eMAddController.setDialogStage(dialogStage);
 
+            scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent event) {
+                    if (keyCombClose.match(event)) {
+                        dialogStage.close();
+                    } else if (keyCombOk.match(event)) {
+                        eMAddController.handleOk();
+                    }
+                }
+            });
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleEditEmployee(ActionEvent actionEvent) {
+        try {
+            RootsEntity markedEmployee = employeeTable.getSelectionModel().getSelectedItem();
+            if(markedEmployee != null){
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource("view/EditEmployee.fxml"));
+                AnchorPane page = (AnchorPane) loader.load();
+
+                Stage dialogStage = new Stage();
+                dialogStage.setTitle("Edit Employee");
+                dialogStage.initModality(Modality.WINDOW_MODAL);
+                dialogStage.initOwner(mainApp.getMainAppWindow());
+                Scene scene = new Scene(page);
+                dialogStage.setScene(scene);
+
+            // Передаём адресата в контроллер.
+                EmployeeEditController emEditController = loader.getController();
+                emEditController.setDialogStage(dialogStage);
+
+                scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent event) {
+                        if (keyCombClose.match(event)) {
+                            dialogStage.close();
+                        } else if (keyCombOk.match(event)) {
+                            emEditController.handleOkEdit();
+                        }
+                    }
+                });
+
+                emEditController.setCurrentEmployee(markedEmployee);
+                emEditController.setLogin(markedEmployee.getLogin());
+                emEditController.setPassword(markedEmployee.getPassword());
+                emEditController.setRootName(markedEmployee.getRootName());
+                dialogStage.showAndWait();
+                showEmployeeInfo();
+            } else {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource("view/ErrorLayout.fxml"));
+                AnchorPane page = (AnchorPane) loader.load();
+                Stage dialogStage = new Stage();
+                dialogStage.setTitle("ERROR");
+                dialogStage.initModality(Modality.WINDOW_MODAL);
+                dialogStage.initOwner(mainApp.getMainAppWindow());
+                Scene scene = new Scene(page);
+                dialogStage.setScene(scene);
+                ErrorController errorController = loader.getController();
+                errorController.setDialogStage(dialogStage);
+                errorController.setErrorLabel("Please choose employee for editing!");
+
+                scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent event) {
+                        if (keyCombOk.match(event)) {
+                            errorController.handleOkError();
+                        }
+                    }
+                });
+
+                dialogStage.showAndWait();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleDeleteEmployee(ActionEvent actionEvent) {
+        try {
+            RootsEntity markedEmployee = employeeTable.getSelectionModel().getSelectedItem();
+            if (markedEmployee != null) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource("view/DeleteEmployee.fxml"));
+                AnchorPane page = (AnchorPane) loader.load();
+
+                Stage dialogStage = new Stage();
+                dialogStage.setTitle("Delete Employee");
+                dialogStage.initModality(Modality.WINDOW_MODAL);
+                dialogStage.initOwner(mainApp.getMainAppWindow());
+                Scene scene = new Scene(page);
+                dialogStage.setScene(scene);
+
+                // Передаём адресата в контроллер.
+                EmployeeDeleteController emDeleteController = loader.getController();
+                emDeleteController.setDialogStage(dialogStage);
+
+                scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent event) {
+                        if (keyCombClose.match(event)) {
+                            dialogStage.close();
+                        } else if (keyCombOk.match(event)) {
+                            emDeleteController.handleOkDelete();
+                        }
+                    }
+                });
+
+                dialogStage.showAndWait();
+                RootsDaoImpl rootsDao = new RootsDaoImpl();
+                boolean okClicked = emDeleteController.isOkClicked();
+                if(okClicked){
+                    rootsDao.deleteRoot(markedEmployee.getId());
+                }
+                showEmployeeInfo();
+            } else {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(MainApp.class.getResource("view/ErrorLayout.fxml"));
+                AnchorPane page = (AnchorPane) loader.load();
+                Stage dialogStage = new Stage();
+                dialogStage.setTitle("ERROR");
+                dialogStage.initModality(Modality.WINDOW_MODAL);
+                dialogStage.initOwner(mainApp.getMainAppWindow());
+                Scene scene = new Scene(page);
+                dialogStage.setScene(scene);
+                ErrorController errorController = loader.getController();
+                errorController.setDialogStage(dialogStage);
+                errorController.setErrorLabel("Do you want delete this employee?");
+
+                scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent event) {
+                        if (keyCombOk.match(event)) {
+                            errorController.handleOkError();
+                        }
+                    }
+                });
+
+                dialogStage.showAndWait();
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -156,7 +297,6 @@ public class EmployeeInfoController extends Controller implements Initializable 
     public MainApp getMainApp() {
         return mainApp;
     }
-
 
     @FXML
     public void handleResetButton(){
