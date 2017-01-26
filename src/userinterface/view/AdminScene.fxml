@@ -17,14 +17,14 @@
 <?import java.lang.String?>
 
 
-<BorderPane fx:id="adminScene" prefHeight="840.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1 userinterface.controllers.AdminController">
+<BorderPane fx:id="adminScene" prefHeight="840.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userinterface.controllers.AdminController">
     <center>
         <TabPane  tabClosingPolicy="UNAVAILABLE" >
             <tabs>
                 <Tab text="Flights information">
                     <content>
                         <BorderPane></BorderPane>
-                        <fx:include fx:id="adminflightLayout" source="AdminFlightLayout.fxml"/>
+                        <fx:include fx:id="adminFlightLayout" source="AdminFlightLayout.fxml"/>
                     </content>
                 </Tab>
                 <Tab text="Passengers information">

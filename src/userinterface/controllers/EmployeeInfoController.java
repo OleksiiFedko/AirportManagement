@@ -69,8 +69,8 @@ public class EmployeeInfoController extends Controller implements Initializable 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        filtersList.add(new GuiFilter(rootField, "EmployeeInfo", "RootName", true));
-        filtersList.add(new GuiFilter(loginField, "EmployeeInfo", "Login"));
+        filtersList.add(new GuiFilter(rootField, "Roots", "RootName"));
+        filtersList.add(new GuiFilter(loginField, "Roots", "Login"));
 
         setFiltersPaneAnimation();
         setFiltersItems();
@@ -81,7 +81,7 @@ public class EmployeeInfoController extends Controller implements Initializable 
     private void showEmployeeInfo() {
         employeeData.clear();
         RootsDaoImpl rootsDao = new RootsDaoImpl();
-        List<RootsEntity> rootsEntityList = rootsDao.getAllRoots();
+        List<RootsEntity> rootsEntityList = rootsDao.getAllFilteredRoots(filtersList);
         if (rootsEntityList != null) {
             employeeData.addAll(FXCollections.observableList(rootsEntityList));
             employeeTable.setItems(employeeData);

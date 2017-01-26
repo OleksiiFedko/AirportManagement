@@ -21,8 +21,8 @@ public class RootsDaoImpl  extends DataBaseUtil implements RootsDao{
     private ResultSet rs;
     private String query = "SELECT idRoots, " +
             "RootName,  " +
-            "Login, Password, " +
-            "ClassType, rootsEntity";
+            "Login, Password " +
+            "FROM Roots";
 
     private List<RootsEntity> rootsEntityList = new ArrayList<>();
 
@@ -35,6 +35,7 @@ public class RootsDaoImpl  extends DataBaseUtil implements RootsDao{
                 rs = prst.executeQuery();
                 if (!rs.isBeforeFirst()) {
                     System.out.printf("No data");
+                    return null;
                 }
                 while (rs.next()) {
                     int idRoots = rs.getInt(1);
@@ -50,16 +51,17 @@ public class RootsDaoImpl  extends DataBaseUtil implements RootsDao{
                                                 );
                     rootsEntityList.add(currentEmployee);
                 }
+                return rootsEntityList;
             }
+
         } catch (SQLException sqlE){
             System.out.printf("Connection problem");
         } finally {
             try { if(con!=null){con.close();} } catch(SQLException se) { /*can't do anything */ }
             try { if(con!=null){prst.close();} } catch(SQLException se) { /*can't do anything */ }
             try { if(con!=null){rs.close();} } catch(SQLException se) { /*can't do anything */ }
-
         }
-        return rootsEntityList;
+        return null;
     }
 
     @Override

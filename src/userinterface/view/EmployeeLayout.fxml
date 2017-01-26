@@ -107,8 +107,8 @@
                                         </AnchorPane>
                                         <HBox alignment="center" spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                            <children>
-                                               <Button prefWidth="100.0" text="Search" />
-                                               <Button fx:id="resetButton" prefWidth="100.0" text="Reset" />
+                                               <Button onAction="#handleSearchButton" prefWidth="100.0" text="Search" />
+                                               <Button fx:id="resetButton" onAction="#handleResetButton" prefWidth="100.0" text="Reset" />
                                            </children>
                                         </HBox>
                                     </children>
@@ -116,7 +116,7 @@
                                 <AnchorPane>
                                     <children>
                                         <Label alignment="CENTER" text="Content area" textAlignment="CENTER" wrapText="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                        <TableView fx:id="EmployeeTable" layoutY="36.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="36.0">
+                                        <TableView fx:id="employeeTable" layoutY="36.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="36.0">
                                             <placeholder>
                                                 <Label text="No data to display" />
                                             </placeholder>

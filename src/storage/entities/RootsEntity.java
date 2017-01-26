@@ -5,24 +5,36 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class RootsEntity {
-    private SimpleIntegerProperty idRoots;
+    private SimpleIntegerProperty id;
+    private SimpleStringProperty rootName;
     private SimpleStringProperty login;
     private SimpleStringProperty password;
-    private SimpleStringProperty rootName;
 
-    public RootsEntity (int idRoots, String login, String password, String rootName){
-        this.idRoots = new SimpleIntegerProperty(idRoots);
+    public RootsEntity(){
+
+    }
+
+    public RootsEntity (int idRoots, String rootName, String login, String password){
+        this.id = new SimpleIntegerProperty(idRoots);
+        this.rootName = new SimpleStringProperty(rootName);
         this.login = new SimpleStringProperty(login);
         this.password =new SimpleStringProperty(password);
-        this.rootName = new SimpleStringProperty(rootName);
     }
 
-    public int getIdRoots() {
-        return idRoots.get();
+    public int getId() {
+        return id.get();
     }
 
-    public void setIdRoots(int idRoots) {
-        this.idRoots.set(idRoots);
+    public void setId(int id) {
+        this.id.set(id);
+    }
+
+    public String getRootName() {
+        return rootName.get();
+    }
+
+    public void setRootName(String rootName) {
+        this.rootName.set(rootName);
     }
 
     public String getLogin() {
@@ -41,16 +53,12 @@ public class RootsEntity {
         this.password.set(password);
     }
 
-    public String getRootName() {
-        return rootName.get();
+    public SimpleIntegerProperty id(){
+        return id;
     }
 
-    public void setRootName(String rootName) {
-        this.rootName.set(rootName);
-    }
-
-    public SimpleIntegerProperty idRoots(){
-        return idRoots;
+    public StringProperty rootNameProperty(){
+        return rootName;
     }
 
     public StringProperty loginProperty(){
@@ -61,7 +69,4 @@ public class RootsEntity {
         return password;
     }
 
-    public StringProperty rootNameProperty(){
-        return rootName;
-    }
 }
