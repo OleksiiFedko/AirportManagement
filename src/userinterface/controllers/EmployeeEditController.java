@@ -11,7 +11,7 @@ import storage.entities.RootsEntity;
 /**
  * Created by Alish on 19.01.2017.
  */
-public class EmployeeAddController {
+public class EmployeeEditController {
     @FXML
     private TextField login;
     @FXML
@@ -21,7 +21,7 @@ public class EmployeeAddController {
 
 
     private Stage dialogStage;
-    private boolean okClicked = false;
+    private RootsEntity currentEmployee;
 
     @FXML
     private void initialize() {
@@ -31,21 +31,15 @@ public class EmployeeAddController {
         this.dialogStage = dialogStage;
     }
 
-    public boolean isOkClicked() {
-        return okClicked;
-    }
 
     @FXML
-    public void handleOk() {
-        if (isInputValid()) {
-            RootsEntity currentEmployee = new RootsEntity (rootName.getText(), login.getText(), password.getText());
+    public void handleOkEdit() {
+        currentEmployee.setRootName(rootName.getText());
+        currentEmployee.setLogin(login.getText());
+        currentEmployee.setPassword(password.getText());
 
-            okClicked = true;
-            RootsDaoImpl rootsDao = new RootsDaoImpl();
-            rootsDao.createRoot(currentEmployee);
-            rootsDao.updateRoot(currentEmployee);
-            dialogStage.close();
-        }
+        RootsDaoImpl rootsDao = new RootsDaoImpl();
+        rootsDao.updateRoot(currentEmployee);
     }
 
 
@@ -82,5 +76,25 @@ public class EmployeeAddController {
 
             return false;
         }
+    }
+
+    public RootsEntity getCurrentEmployee() {
+        return currentEmployee;
+    }
+
+    public void setCurrentEmployee(RootsEntity currentPassenger) {
+        this.currentEmployee = currentEmployee;
+    }
+
+    public void setLogin(String login) {
+        this.login.setText(login);
+    }
+
+    public void setPassword(String password) {
+        this.password.setText(password);
+    }
+
+    public void setRootName(String rootName) {
+        this.rootName.setText(rootName);
     }
 }

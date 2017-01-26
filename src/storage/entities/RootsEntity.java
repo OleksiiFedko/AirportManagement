@@ -10,7 +10,7 @@ public class RootsEntity {
     private SimpleStringProperty login;
     private SimpleStringProperty password;
 
-    public RootsEntity(){
+    public RootsEntity(String text, String loginText, String passwordText){
 
     }
 
