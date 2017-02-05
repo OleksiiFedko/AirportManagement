@@ -28,7 +28,7 @@ public class MainApp extends Application {
 
     // Parameters of main app Window
     private final String APP_NAME = "Air-flight management system";
-    private final String APP_ICON = "userinterface/main/images/brain_logo_32.png";
+    private final String APP_ICON = "userinterface/main/resouces/images/brain_logo_32.png";
     private final int WINDOW_HEIGHT = 700;
     private final int WINDOW_WIDTH = 1024;
 

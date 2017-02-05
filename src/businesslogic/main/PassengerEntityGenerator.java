@@ -21,14 +21,8 @@ public class PassengerEntityGenerator {
         PassengersEntity generatedPassenger;
         List<PassengersEntity> passengersList = new ArrayList<>();
         String sex, firstName, lastName, nationality, passport, birthday, classType, flightNum;
-//        Это я добавлял руками перечень классов и полётов. Но надо будет в идеале их передавать в этот метод.
         List<String> classTypeList = new ArrayList<>();
         List<String> flightNumberList = new ArrayList<>();
-//        classTypeList.add("Business");
-//        classTypeList.add("Econom");
-//        flightNumberList.add("LK350");
-//        flightNumberList.add("SK128");
-//        flightNumberList.add("SL210");
         for(int i = 0; i < 20; i++){
             sex = generator.sexGenerator();
             firstName = generator.firstNameGenerator(sex);

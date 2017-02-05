@@ -88,7 +88,6 @@ public class FlightsDaoImpl extends DataBaseUtil implements FlightsDao {
                     filteredString = " AND " + tableShortName+filter.getSqlField() + "='"+filter.getSelectedValue()+"'";
                 }
                 query = query+filteredString;
-                System.out.println(query);
             }
         });
 

@@ -50,4 +50,5 @@
                 <Button layoutX="249.375" layoutY="241.0" mnemonicParsing="false"  prefWidth="90.0" text="Cancel" onAction="#handleCancelButton" />
             </children>
         </HBox>
-    </children></AnchorPane>
+    </children>
+</AnchorPane>
