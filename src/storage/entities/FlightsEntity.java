@@ -15,7 +15,7 @@ public class FlightsEntity {
     private StringProperty classType;
     private DoubleProperty classPrice;
 
-    public FlightsEntity() {
+    public FlightsEntity(String text, String departureCityText, String arrivalCityText, String classFlightText, String priceText, String statusText) {
     }
 
     public FlightsEntity(int id, String arrivalTime, String departureTime, String flightNumber, String flightStatus, String gate, String terminal, String cityOfDeparture, String cityOfArrival, String classType, Double classPrice) {

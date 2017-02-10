@@ -48,8 +48,6 @@ public class EmployeeAddController {
         }
     }
 
-
-
     @FXML
     private void handleCancel() {
         dialogStage.close();

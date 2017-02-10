@@ -125,7 +125,7 @@ public class FlightsDaoImpl extends DataBaseUtil implements FlightsDao {
     }
 
     @Override
-    public void updateFlight(int id) {
+    public void updateFlight(FlightsEntity id) {
 
     }
 }
