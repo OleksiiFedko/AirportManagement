@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userinterface.main.controllers.PassengersAddingController">
+<AnchorPane prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userinterface.main.controllers.PassengersEditingController">
     <children>
         <GridPane layoutX="-16.0" layoutY="31.0" prefHeight="400.0" prefWidth="460.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
             <columnConstraints>
@@ -35,18 +35,18 @@
                 <TextField fx:id="nationality" promptText="Nationality" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField fx:id="passport" promptText="Passport" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <HBox GridPane.columnIndex="1" GridPane.rowIndex="4" spacing="10.0">
-                    <ComboBox fx:id="yearBox" onAction="#isYearSelected" promptText="Year" />
+                    <ComboBox fx:id="yearBox" onAction="#isYearSelected" promptText="Year"/>
                     <ComboBox fx:id="monthBox" onAction="#isMonthSelected" promptText="Month"/>
                     <ComboBox fx:id="dayBox" promptText="Day"/>
                 </HBox>
                 <ComboBox fx:id="sex" promptText="Sex" GridPane.columnIndex="1" GridPane.rowIndex="5" prefWidth="280.0"/>
-                <ComboBox fx:id="classType" promptText="Class type" GridPane.columnIndex="1" GridPane.rowIndex="6" prefWidth="280.0"/>
-                <ComboBox fx:id="flightNum" promptText="Flight number" GridPane.columnIndex="1" GridPane.rowIndex="7" prefWidth="280.0"/>
+                <ComboBox fx:id="classType" promptText="Class Type" GridPane.columnIndex="1" GridPane.rowIndex="6" prefWidth="280.0"/>
+                <ComboBox fx:id="flightNum" promptText="Flight Number" GridPane.columnIndex="1" GridPane.rowIndex="7" prefWidth="280.0"/>
             </children>
         </GridPane>
         <HBox layoutX="197.1875" layoutY="241.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
             <children>
-                <Button layoutX="197.1875" layoutY="241.0" mnemonicParsing="false"  prefWidth="90.0" text="OK" onAction="#handleOkAdd" />
+                <Button layoutX="197.1875" layoutY="241.0" mnemonicParsing="false"  prefWidth="90.0" text="OK"  onAction="#handleOkEdit"/>
                 <Button layoutX="249.375" layoutY="241.0" mnemonicParsing="false"  prefWidth="90.0" text="Cancel" onAction="#handleCancelButton" />
             </children>
         </HBox>
