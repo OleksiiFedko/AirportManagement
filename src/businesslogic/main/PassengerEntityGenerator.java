@@ -10,11 +10,6 @@ import java.util.Random;
 public class PassengerEntityGenerator {
     Random  random = new Random();
 
-    /* Этот комент удали, это рабочик комент для меня, что бы не сворачиваться, а видеть необходимые поля.
-    * idPassenger, FirstName+, LastName+, Nationality+, Passport+,Birthday+, Sex+, ClassType+, FlightNumber;
-    * idFlight, FlightNumber DepartureCity, DepartureTime, ArrivalCity, ArivalTime, Gate, Terminal, FlightStatus, ClassType, Price;
-    *
-    * */
 
     public List<PassengersEntity>  passengersGenerator() {
         PassengerEntityGenerator generator = new PassengerEntityGenerator();
