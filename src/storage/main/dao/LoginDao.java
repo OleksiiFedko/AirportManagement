@@ -1,8 +1,0 @@
-package storage.main.dao;
-
-import storage.main.entities.RootsEntity;
-
-public interface LoginDao {
-    boolean checkAppUser(String appUserLogin, String appUserPassword);
-    RootsEntity getAppUser();
-}
